@@ -1520,20 +1520,21 @@ div.tocify {
 </div>
 
 
-<div id="學習指引markdown-語法學習" class="section level2">
-<h2>學習指引：Markdown 語法學習</h2>
-<p>RMarkdown 是一種檔案類型，使用者可以在 R 當中交替使用 Markdown 內文以及 R 的程式碼，並以此產出各種格式的報告，譬如 hmtl, word, PDF, PPT 等，用途很廣。</p>
-<p>因此，這份作業希望能夠讓你熟習於撰寫 Markdown 語法，希望你能夠成為 Markdown 界的霸主，聽起來很厲害。</p>
-<p>請參考網路上的教學，譬如這份中文的 <a href="https://gist.github.com/billy3321/1001749662c370887c63bb30f26c9e6e">Markdown Cheatsheet 中文版</a>，或是這份中文的 <a href="https://cowmanchiang.me/gitbook/gitbook/contents/how.html">Gitbook 語法</a>。若你習慣看英文，或是想練習英文，不妨參考 <a href="https://guides.github.com/features/mastering-markdown/">Mastering Markdown</a>，以及 RStudio 寫的 <a href="https://rmarkdown.rstudio.com/authoring_pandoc_markdown.html">Pandoc Markdown</a></p>
-<p>你可以選擇仔細練習每個部份，或是有問題的時候再去查找上面的資源。緊接著就要開始寫作業了，真是令人興奮！</p>
+<div id="作業目的markdown-語法學習" class="section level2">
+<h2>作業目的：Markdown 語法學習</h2>
+<p>這份作業希望能夠讓你熟習於撰寫 Markdown 語法，希望你能夠成為 Markdown 界的霸主，聽起來很厲害。</p>
+<p>請參考網路上的教學，你可以選擇仔細練習每個部份，或是有問題的時候再去查找上面的資源。緊接著就要開始寫第一份作業了，真是令人興奮！</p>
+<p>你可以隨時點擊 RStudio 上方的 Knit 按鈕輸出檔案並且預覽，也可以利用 <a href="https://jbt.github.io/markdown-editor">Markdown 線上編輯器</a>看你的結果長得如何。</p>
 </div>
 <div id="作業-rmarkdown-語法練習" class="section level2">
 <h2>作業: RMarkdown 語法練習</h2>
 <p>滿分共 100 分。</p>
 <div id="a.-資料新聞案例舉例-60-分" class="section level3">
 <h3>A. 資料新聞案例舉例 (60 分)</h3>
-<p>請找一則資料新聞，並以 Markdown 語法介紹它，介紹文必須包含底下者三種元素：字體加深, 清單(lists), 連結(links)，此外請你再額外挑選至少兩種元素，譬如說字體變斜, 插入圖片, 加入引用, etc. 請至少產出兩個段落（因此換行很重要），但字數不用多，250字-400字即可，重點是使用 Markdown 語法。</p>
-<p>你可以點擊 RStudio 上方的 Knit 按鈕輸出檔案並且預覽，也可以利用 <a href="https://jbt.github.io/markdown-editor">Markdown 線上編輯器</a>看你的結果長得如何。請把結果貼在<code>#### 結果</code>下方。</p>
+<p>請找一則資料新聞，並以 Markdown 語法介紹它。</p>
+<p>介紹文必須包含底下者三種元素：字體加深, 清單(lists), 連結(links)。此外，請你再額外挑選至少兩種元素，譬如說字體變斜, 插入圖片, 加入引用, etc.</p>
+<p>因為重點是使用 Markdown 語法，因此字數不用多，250字~400字即可，全文段落在 2段~4段間，請練習如何在 Markdown 中分行與分段！</p>
+<p>請把結果貼在<code>#### 結果</code>下方。</p>
 <div id="結果" class="section level4">
 <h4>結果</h4>
 </div>
@@ -1542,13 +1543,13 @@ div.tocify {
 <h3>B. R code chunk 練習 (40 分)</h3>
 <div id="b.01-20分" class="section level4">
 <h4>B.01 (20分)</h4>
-<p>如先前所提，Rmarkdown 當中可以插入 code chunk，請參考 <a href="https://rmarkdown.rstudio.com/lesson-3.html">RStudio 的教學</a>，在底下插入一段 code chunk，並在當中計算 1+1 的答案並將結果列印出來。</p>
+<p>如先前所提，Rmarkdown 當中可以插入 code chunk，請參考 <a href="https://rmarkdown.rstudio.com/lesson-3.html">RStudio 的教學</a>，在底下插入一段 code chunk，並在當中計算 <code>1+1</code> 的答案並將結果列印出來。</p>
 </div>
 <div id="b.02-20分" class="section level4">
 <h4>B.02 (20分)</h4>
 <ul>
-<li><p>請解釋 chunk header 中參數 include = FALSE 會有什麼後果，並在底下加一段 include = FALSE 的 code chunk，一樣在裡面計算 1+1 的答案。</p></li>
-<li><p>請解釋 chunk header 中參數 echo = FALSE 會有什麼後果，並在底下加一段 echo = FALSE 的 code chunk，一樣在裡面計算 1+1 的答案。</p></li>
+<li><p>請解釋 chunk header 中參數 include = FALSE 會有什麼後果，並在底下加一段 include = FALSE 的 code chunk，一樣在裡面計算 <code>1+1</code> 的答案。</p></li>
+<li><p>請解釋 chunk header 中參數 echo = FALSE 會有什麼後果，並在底下加一段 echo = FALSE 的 code chunk，一樣在裡面計算 <code>1+1</code> 的答案。</p></li>
 </ul>
 </div>
 </div>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Lab01 Tutorial</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="曾子軒 Dennis Tseng" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/metropolis.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/metropolis-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Lab01 Tutorial
+## RMarkdown and Github
+### 曾子軒 Dennis Tseng
+### 台大新聞所 NTU Journalism
+### 2021/02/22
+
+---
+
+&lt;style type="text/css"&gt;
+
+.remark-slide-content {
+    padding: 1em 1em 1em 1em;
+    font-size: 28px;
+}
+
+.my-one-page-font {
+  padding: 1em 1em 1em 1em;
+  font-size: 20px;
+  /*xaringan::inf_mr()*/
+}
+
+&lt;/style&gt;
+
+
+---
+# Github related 
+
+- Github
+ - 去[官網](https://github.com/)註冊帳號
+ - 老師上課的 code [連結](https://github.com/P4CSS/R4CSS)
+ - 老師上課的 data [連結](https://github.com/P4CSS/R4CSSData)
+ - 助教 lab 和作業的  [連結](https://github.com/P4CSS/R4CSS_TA)
+- Github Desktop
+ - 去[官網](https://desktop.github.com/)下載，然後登入
+ - 再去剛剛作業的 [連結](https://github.com/P4CSS/R4CSS_TA)
+ - 找到 code 按下，然後可以選擇 open with github desktop 或者 download ZIP，兩者各有優缺
+
+---
+# 檔案格式
+
+- R
+ - 檔案名稱以.R 作為結尾，平常都在裡面寫程式
+- Rmd
+ - 檔案名稱以.Rmd 作為結尾，裡面可以寫文字也可以寫程式
+ - Lab 的 homework 跟 Assignment 都用這個編寫
+- html
+ - 檔案名稱以.html 作為結尾，用來組織架構並呈現網頁內容
+ - Lab 的 homework 跟 Assignment 都輸出成這個
+
+---
+# 交作業流程
+
+- 方法一
+ - 打開 Github Desktop，只要雲端上有更新，就把更新抓下來
+ (這個動作稱為 pull)
+ - 抓下來後編輯 Rmd，輸出成 html 後，繳交 Rmd 與 html 至 NTU Cool
+ - 優點：快速(因為只要抓有更新的檔案)
+- 方法二
+ - 打開 Github 網頁，只要雲端上有更新，就全部下載下來
+ - 下載後編輯 Rmd，輸出成 html 後，繳交 Rmd 與 html 至 NTU Cool
+ - 優點：簡單(不用理解 push, pull, repo, commit)
+ 
+---
+# RMarkdown 與 Markdown
+
+- Markdown
+ - 一種標記語言，特色是無須透過滑鼠便可完成排版
+ - 非常容易閱讀，且簡單好學不吃力
+ - 中文版教學如 [Markdown Cheatsheet 中文版](https://gist.github.com/billy3321/1001749662c370887c63bb30f26c9e6e) 或者 [Gitbook語法](https://cowmanchiang.me/gitbook/gitbook/contents/how.html)
+ - 英文版教學如 [Mastering Markdown](https://guides.github.com/features/mastering-markdown/)，以及 RStudio 寫的 [Pandoc Markdown
+](https://rmarkdown.rstudio.com/authoring_pandoc_markdown.html)
+- RMarkdown
+ - 是一種檔案類型(file format)，使用者可以在 R 當中交替使用 Markdown 內文以及 R 的程式碼，並輸出多樣格式，如 hmtl, word, PDF, PPT 等，用途很廣
+ - 之後的作業就是讓在 RMarkdown 中同時寫文字與程式碼
+
+---
+
+class: inverse, center, middle
+
+# Practice Markdown!
+
+Using [Markdown online editor](https://jbt.github.io/markdown-editor/)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"self_contained": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
