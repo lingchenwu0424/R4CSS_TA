@@ -1,0 +1,181 @@
+---
+title: "AS02_R-Intermediate"
+author: "你是誰 R09342000 新聞所碩五"
+date: "2021/02/22"
+output:
+  html_document:
+    number_sections: no
+    theme: united
+    highlight: tango
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: no
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, results = 'hold', comment = '#>', error = TRUE)
+```
+
+## 作業: R-Intermediate
+
+基本題 100 分，加分題 25 分，超過 100 分會以實際分數登記 e.g. 118 分。
+
+### for loop & conditional statement (35 分)
+
+有位同學小軒非常偏食，又會因為某些原因恣意的拒吃某些店家。請依照小軒的飲食禁忌，利用迴圈與條件判斷
+，印出一週中每天各自小軒**會吃**的店家。
+
+- 飲食條件一: 若當天為週間的奇數日(週一、週三、週五)，僅吃名稱長度為奇數的店家
+- 飲食條件二: 若當天為週間的偶數日(週二、週四)，僅吃名稱中包含水餃的店家
+- 飲食條件三: 若當天為週六，僅吃名稱中包含麵館的店家
+- 飲食條件四: 若當天為週日，小軒節食都不吃，請印出**一次**"週日小軒都不吃"
+
+上面的條件看來有些複雜，下方提供提示:   
+
+- 本題可以利用雙層迴圈   
+- 判斷店名長度可以利用`str_length()`函數   
+- 判斷店名是否包含特定字詞，可以利用正規表達式，之後會教學，可以先用 str_detect(字串, "關鍵字")判斷，舉例來說，str_detect("信陽麵館", "館") 會得到 TRUE   
+- 最後一部分請印出**一次**相對困難，可以想一下要怎麼不多印幾次，譬如利用條件判斷式   
+
+```{r message=FALSE}
+### your code
+library(tidyverse)
+vector_shop <- c("五九麵館", "親來食堂", "憶馬當鮮", "揪食堂韓國餐館", 
+                "找碗", "大李水餃", "李記水餃", "林師傅", "馬祖麵館")
+vector_weekday <- c("週一", "週二", "週三", "週四", "週五", "週六", "週日")
+
+for (i in 1:length(vector_weekday)) {
+  for (j in 1:length(vector_shop)) {
+    if(i %in% c(1,3,5)){
+      if(str_length(vector_shop[j]) %% 2 == 1){print(str_c(vector_weekday[i], "小軒吃", vector_shop[j]))}
+    } else if(i %in% c(2, 4)){
+      if(str_detect(vector_shop[j], "水餃")){print(str_c(vector_weekday[i], "小軒吃", vector_shop[j]))}
+    } else if(i %in% c(6)){
+      if(str_detect(vector_shop[j], "館")){print(str_c(vector_weekday[i], "小軒吃", vector_shop[j]))}
+    } else if(i %in% c(7) & j == 1) {
+      print("週日小軒都不吃")
+    }
+  }
+}
+
+### your code
+
+
+### result should be
+# [1] "週一小軒吃揪食堂韓國餐館"
+# [1] "週一小軒吃林師傅"
+# [1] "週二小軒吃大李水餃"
+# [1] "週二小軒吃李記水餃"
+# [1] "週三小軒吃揪食堂韓國餐館"
+# [1] "週三小軒吃林師傅"
+# [1] "週四小軒吃大李水餃"
+# [1] "週四小軒吃李記水餃"
+# [1] "週五小軒吃揪食堂韓國餐館"
+# [1] "週五小軒吃林師傅"
+# [1] "週六小軒吃五九麵館"
+# [1] "週六小軒吃揪食堂韓國餐館"
+# [1] "週六小軒吃馬祖麵館"
+# [1] "週日小軒都不吃"
+```
+
+### functions (i) (35 分)
+
+承接上題，請將上方迴圈改寫為名為 `hsuan_meal()` 的函數，小軒使用此函數時會輸入當週的第幾天 e.g. 週一，以及店家名稱，並依照飲食條件得到結果。
+
+- 預期結果舉例:
+ - `hsuan_meal("週一", "林師傅")` 會得到 `週一小軒吃林師傅`
+ - `hsuan_meal("週二", "李記水餃")` 會得到 `週二小軒不吃李記水餃`
+ - `hsuan_meal("週日", "找碗")` 會得到 `週日小軒不吃找碗`
+
+```{r}
+vector_shop <- c("五九麵館", "親來食堂", "憶馬當鮮", "揪食堂韓國餐館", 
+                "找碗", "大李水餃", "李記水餃", "林師傅", "馬祖麵館")
+vector_weekday <- c("週一", "週二", "週三", "週四", "週五", "週六", "週日")
+
+### your code
+hsuan_meal <- function(weekday, name){
+  if(which(vector_weekday==weekday) %% 2 == 1 & str_length(name) %% 2 == 1 ) {
+    print(str_c(weekday, "小軒吃", name))
+  } else if(which(vector_weekday==weekday) %in% c(2,4) & str_detect(name, "館")) {
+    print(str_c(weekday, "小軒吃", name))
+  } else if(which(vector_weekday==weekday) %in% c(6) & str_detect(name, "水餃")) {
+    print(str_c(weekday, "小軒吃", name))
+  } else {
+    print(str_c(weekday, "小軒不吃", name))
+  }
+}
+### result should be
+
+# hsuan_meal("週一","林師傅")
+# [1] "週一小軒吃林師傅"
+
+# hsuan_meal("週二","李記水餃")
+# [1] "週二小軒不吃李記水餃"
+
+# hsuan_meal("週日","找碗")
+# [1] "週日小軒不吃找碗"
+```
+
+### functions (ii) (30 分) 
+
+請撰寫一個函數 `get_zodiac()`，使用者輸入生日，該函數便會告訴你所屬的星座。
+不能使用他人開發好的現成函數，要自己寫喔。
+
+- hint01: 可以利用條件判斷(if else)
+- hint02: 想辦法處理使用者輸入的日期
+
+- 預期結果舉例:
+- `get_zodiac("1996-09-01")` 會得到 `天秤座`
+- `get_zodiac(1997-01-01)` 會得到 `魔羯座`
+- `get_zodiac("一九九八三月十四日")` 會得到 `請以"YYYY-MM-DD"格式輸入數字`
+
+```{r}
+### your code
+# get_zodiac <- function(){
+#   
+# }
+
+### test your code
+```
+
+### bonus (25 分) 
+
+#### A. 用 apply 讀取多個檔案 (10 分) 
+
+在 lab 中利用 for loop 讀取了大量檔案，datacamp 的教學中提到了 apply 家族的函數。請用 apply 家族的函數一次讀取`data/Lab03/` 路徑中的十個檔案。
+
+```{r message=FALSE}
+### your code
+# vector_file_name <- dir(path = "data/Lab03/")
+vector_file_name <- list.files(path = "data/Lab03/", full.names=TRUE)  
+
+df_apply <- lapply(vector_file_name, FUN = read_csv) %>% bind_rows()
+```
+
+
+#### B. 學習使用 purrr::map (15 分) 
+
+##### B.1 基本使用 
+
+```{r message=FALSE}
+### your code
+# vector_file_name <- dir(path = "data/Lab03/")
+vector_file_name <- list.files(path = "data/Lab03/", full.names=TRUE)  
+
+df_apply <- lapply(vector_file_name, FUN = read_csv) %>% bind_rows()
+```
+
+##### B.2 讀取多個檔案
+
+```{r message=FALSE}
+### your code
+# vector_file_name <- dir(path = "data/Lab03/")
+vector_file_name <- list.files(path = "data/Lab03/", full.names=TRUE)  
+
+df_map <- map_df(vector_file_name, ~read_csv(.)) %>% bind_rows()
+```
+
+
+
+
