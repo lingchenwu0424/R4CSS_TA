@@ -1,0 +1,68 @@
+---
+title: "Lab02_Homework_R-Basic"
+author: "你是誰 R09342000 新聞所碩五"
+date: "2021/02/22"
+output:
+  html_document:
+    number_sections: no
+    theme: united
+    highlight: tango
+    toc: yes
+    toc_float:
+      collapsed: no
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, results = 'hold', comment = '#>', error = TRUE)
+```
+
+## 作業目的：atomic vector and list
+
+這份作業希望能夠讓你實際操作向量。
+
+## 作業: RMarkdown 語法練習
+
+滿分共 100 分。
+
+### A. vector (50 分) 
+
+- (1)`vector_01_left` 與 `vector_01_right` 長度不等，請解釋兩者為什麼相乘不會出現 error，又為什麼得到那個值？
+- (1)回答:
+
+```{r warning=FALSE}
+# (1)
+vector_01_left <- c(1,3,5,10,12)
+vector_01_right <- c(2,3)
+vector_01_left*vector_01_right
+```
+
+- (2)請利用兩種方法，將`vector_02`變成`c(2,3,5)`
+
+```{r warning=FALSE}
+# (2)
+vector_02 <- c(1,3,5)
+### your code
+# method01
+
+# method02
+```
+
+### B. list (50 分) 
+
+底下有兩個 list，請撰寫程式
+
+- (1)利用 `[]`, `[[]]`, `$`，無論哪種，抓出`list_true`的 `TRUE` 元素
+- (2)利用 assignment 以外的方法把`list_true` 變成 `list_final`(assignment的意思是 `list_true <- list_final`)
+
+```{r}
+list_true  <- list(a="bcd",c=list(1,2,"g"),5,abc=list(6,4,list(TRUE)))
+list_final <- list(        c=list(1,  "g"),5,abc=list(6,4,list(FALSE)))
+
+### your code
+# (1)
+
+# (2)
+
+```
+
+

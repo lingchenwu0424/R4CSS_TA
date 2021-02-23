@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Lab02_R-Basic_Tutorial</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="曾子軒 Dennis Tseng" />
+    <script src="libs/header-attrs-2.6/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/metropolis.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/metropolis-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Lab02_R-Basic_Tutorial
+## R Briefing and TA part
+### 曾子軒 Dennis Tseng
+### 台大新聞所 NTU Journalism
+### 2021/02/22
+
+---
+
+&lt;style type="text/css"&gt;
+
+.remark-slide-content {
+    padding: 1em 1em 1em 1em;
+    font-size: 28px;
+}
+
+.my-one-page-font {
+  padding: 1em 1em 1em 1em;
+  font-size: 20px;
+  /*xaringan::inf_mr()*/
+}
+
+&lt;/style&gt;
+
+
+
+
+---
+
+# Vectors 向量
+
+- **原子型態向量(Atomic vectors)**, 有六種類型: 邏輯logical, 整數integer, 浮點數double, 字符character, 複數complex, and 原始raw
+- 最常用的是前四種 logical, integer, double, character，atomic vectors 內的元素類型都相同(homogeneous)
+- **列表(Lists)**, 可以包含不同類型(heterogeneous)的元素
+
+&lt;img src="photo/Lab02_vector.jpg" width="45%" height="45%" /&gt;
+
+---
+# Atomic Vectos
+
+- `c(5,6)` 是 vectors, `5` 也是，等同於 `c(5)`
+- 用 `c()` 創建與拼接, 像是 `x = c(1,2)` 以及 `y = c(x, x[1], x[2])`
+- 用 ` length()` 獲取長度, 像是 `length(x) = 2`
+- 幾個特性: 再利用(recycling), 篩選(filtering), 向量化(vectorization)
+- arithmetic: 可以加減乘除, e.g. `c(2,5) + c(1,4)`
+
+---
+# Vector Operations
+
+- 常用函數 `seq(from, to, by)`, 分別代表開始, 終結, 間距 
+- 常用函數 `rep(x, times)`, 分別代表要重複的向量, 重複的次數
+
+
+```r
+seq(from=5,to=30,by=5)
+```
+
+```
+## [1]  5 10 15 20 25 30
+```
+
+```r
+seq(from=5,to=29,by=5)
+```
+
+```
+## [1]  5 10 15 20 25
+```
+
+```r
+seq(from=1,to=2,by=0.2)
+```
+
+```
+## [1] 1.0 1.2 1.4 1.6 1.8 2.0
+```
+
+---
+
+# Vector Operations
+
+- 常用函數 `seq(from, to, by)`, 分別代表開始, 終結, 間距 
+- 常用函數 `rep(x, times)`, 分別代表要重複的向量, 重複的次數
+
+
+```r
+rep(2,3)
+```
+
+```
+## [1] 2 2 2
+```
+
+```r
+rep(c(1,3,5),3)
+```
+
+```
+## [1] 1 3 5 1 3 5 1 3 5
+```
+
+```r
+rep(1:3, 2)
+```
+
+```
+## [1] 1 2 3 1 2 3
+```
+
+---
+# Vectorized/Vectorization
+
+- 向量化的特性有點難用文字說明
+- 原文: functions are applied element-wise to vectors
+
+
+```r
+# 第一個跟第一個比
+c(1,2,4) &gt; c(0,0,4)
+```
+
+```
+## [1]  TRUE  TRUE FALSE
+```
+
+```r
+# 第一個跟第一個相加
+c(1,2,4) + c(0,0,4)
+```
+
+```
+## [1] 1 2 8
+```
+
+```r
+# 取四捨五入
+round(c(1.2, 3.9, 0.4))
+```
+
+```
+## [1] 1 4 0
+```
+
+```r
+sqrt(c(2,5,10))
+```
+
+```
+## [1] 1.414214 2.236068 3.162278
+```
+
+---
+# Recycling
+
+- R 會自動回收長度不同的向量
+
+
+```r
+# 自動延長前者
+c(1,2) + c(1,2,3,4,5) 
+```
+
+```
+## [1] 2 4 4 6 6
+```
+
+```r
+# 等同 c(1,2,1,2,1) + c(1,2,3,4,5) 
+
+# 自動延長前者
+2*c(1,2,3,4,5)
+```
+
+```
+## [1]  2  4  6  8 10
+```
+
+```r
+# 等同 c(2,2,2,2,2) + c(1,2,3,4,5) 
+```
+
+---
+# Filtering
+
+
+```r
+a &lt;- c(1,2,-6,8)
+a[a &gt; 0]
+```
+
+```
+## [1] 1 2 8
+```
+
+```r
+a &gt; 0
+```
+
+```
+## [1]  TRUE  TRUE FALSE  TRUE
+```
+
+```r
+a[c(T, T, F, T)]
+```
+
+```
+## [1] 1 2 8
+```
+
+---
+# Filtering
+
+
+```r
+# Assigment
+b &lt;- c(3,5,9)
+b[b == 3] &lt;- -1
+# subset()
+subset(b, b &gt; 3)
+```
+
+```
+## [1] 5 9
+```
+
+```r
+# which(): 告訴你 index
+which(b &gt; 1)
+```
+
+```
+## [1] 2 3
+```
+
+---
+# Conversion/Coercion
+
+- 型態轉換
+ - Explicit coercion: `as.logical()`, `as.integer()`, `as.double()`, `as.character()`
+ - Implicit coercion: 因為 vector 內的元素具有相同型態，所在某些情況下，若元素型態不同，會被強制轉換
+---
+
+# Explicit coercion
+
+
+```r
+as.logical(c(1,0))
+```
+
+```
+## [1]  TRUE FALSE
+```
+
+```r
+as.integer(c(T,F))
+```
+
+```
+## [1] 1 0
+```
+
+```r
+as.logical(c("T",F))
+```
+
+```
+## [1]  TRUE FALSE
+```
+
+```r
+as.character(c(1,0))
+```
+
+```
+## [1] "1" "0"
+```
+
+---
+
+# Implicit coercion
+
+
+```r
+c(T,0)
+```
+
+```
+## [1] 1 0
+```
+
+```r
+c(T,'F')
+```
+
+```
+## [1] "TRUE" "F"
+```
+
+---
+# Atomic Vectos: Summary
+
+- 創建向量: `c()`, `seq()`, `rep()`
+- 獲取元素: index with `[]`, `subset()`, `which()`的輔助
+- 操作向量: 加減乘除, 轉變型態 e.g. `as.logical()`
+- 重要特性
+  - 再利用(recycling): 長度不同會補上元素
+  - 篩選(filtering): 使用`[]`
+  - 向量化(vectorization): 函數與元素, 元素對元素
+
+---
+
+# Lists
+
+- 包含不同型態元素的 vectors
+- 創建 lists: `list()`
+
+
+```r
+i &lt;- list(name="Chen", salary=50000, boss=F)
+j &lt;- list("Lin", 70000, T)
+i
+```
+
+```
+## $name
+## [1] "Chen"
+## 
+## $salary
+## [1] 50000
+## 
+## $boss
+## [1] FALSE
+```
+
+```r
+j
+```
+
+```
+## [[1]]
+## [1] "Lin"
+## 
+## [[2]]
+## [1] 70000
+## 
+## [[3]]
+## [1] TRUE
+```
+
+---
+# List Operation
+
+- 加新的元素
+- 刪掉舊的元素
+
+```r
+i[4] &lt;- "LV2"
+i[[5]] &lt;- "Blue"
+i$friends &lt;- "Huang"
+i$name &lt;- NULL
+i$salary &lt;- NULL
+names(i)
+```
+
+```
+## [1] "boss"    ""        ""        "friends"
+```
+---
+
+# List Operation
+
+- 加新的元素
+- 刪掉舊的元素
+
+```r
+i
+```
+
+```
+## $boss
+## [1] FALSE
+## 
+## [[2]]
+## [1] "LV2"
+## 
+## [[3]]
+## [1] "Blue"
+## 
+## $friends
+## [1] "Huang"
+```
+---
+
+# Lists Opreation
+
+- list 可以有很多層，變得比較複雜，離我們習慣的 table 很遠，但它很常見，知道怎麼用會比較好
+
+
+```r
+k &lt;- list("a", list(1, list("3", "g")))
+k
+```
+
+```
+## [[1]]
+## [1] "a"
+## 
+## [[2]]
+## [[2]][[1]]
+## [1] 1
+## 
+## [[2]][[2]]
+## [[2]][[2]][[1]]
+## [1] "3"
+## 
+## [[2]][[2]][[2]]
+## [1] "g"
+```
+
+---
+
+# Dataframe 
+
+- 資料框，平常用的 excel, spreadsheet 都是
+- 先 row 再 column
+
+
+```r
+head(iris, 3)
+```
+
+```
+##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+```
+
+---
+
+# tidyverse
+
+- 有一個宇宙叫做 tidyverse = tidy + universe
+- 在這個宇宙裡有個叫做 tidy data 的 priciple
+- 由許多遵循共通 philosophy 的套件所組成
+- The tidyverse is a coherent system of packages for data manipulation, exploration and visualization that share a common design philosophy. 
+- 參考他們的 [manifesto](https://tidyverse.tidyverse.org/articles/manifesto.html)
+
+---
+# tibble
+
+- 也是 dataframe，但多了不同於原始 dataframe 的性質
+- 性質一: 列印的時候很舒適，不會全部印出來
+
+
+```r
+# install.packages("tidyverse")
+library("tidyverse")
+```
+
+```
+## Warning: package 'tidyverse' was built under R version 4.0.2
+```
+
+```
+## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──
+```
+
+```
+## ✓ ggplot2 3.3.3     ✓ purrr   0.3.4
+## ✓ tibble  3.0.6     ✓ dplyr   1.0.4
+## ✓ tidyr   1.1.2     ✓ stringr 1.4.0
+## ✓ readr   1.4.0     ✓ forcats 0.5.1
+```
+
+```
+## Warning: package 'ggplot2' was built under R version 4.0.2
+```
+
+```
+## Warning: package 'tibble' was built under R version 4.0.2
+```
+
+```
+## Warning: package 'tidyr' was built under R version 4.0.2
+```
+
+```
+## Warning: package 'readr' was built under R version 4.0.2
+```
+
+```
+## Warning: package 'purrr' was built under R version 4.0.2
+```
+
+```
+## Warning: package 'dplyr' was built under R version 4.0.2
+```
+
+```
+## Warning: package 'stringr' was built under R version 4.0.2
+```
+
+```
+## Warning: package 'forcats' was built under R version 4.0.2
+```
+
+```
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+```
+
+```r
+# iris
+as_tibble(iris)
+```
+
+```
+## # A tibble: 150 x 5
+##    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+##           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
+##  1          5.1         3.5          1.4         0.2 setosa 
+##  2          4.9         3            1.4         0.2 setosa 
+##  3          4.7         3.2          1.3         0.2 setosa 
+##  4          4.6         3.1          1.5         0.2 setosa 
+##  5          5           3.6          1.4         0.2 setosa 
+##  6          5.4         3.9          1.7         0.4 setosa 
+##  7          4.6         3.4          1.4         0.3 setosa 
+##  8          5           3.4          1.5         0.2 setosa 
+##  9          4.4         2.9          1.4         0.2 setosa 
+## 10          4.9         3.1          1.5         0.1 setosa 
+## # … with 140 more rows
+```
+
+---
+# tibble
+
+- 性質二: subset 的時候不一樣
+
+
+```r
+df &lt;- data.frame(a = 1:3, bc = 4:6)
+tbl &lt;- tibble(a = 1:3, bc = 4:6)
+df[, "a"]
+```
+
+```
+## [1] 1 2 3
+```
+
+```r
+tbl[, "a"]
+```
+
+```
+## # A tibble: 3 x 1
+##       a
+##   &lt;int&gt;
+## 1     1
+## 2     2
+## 3     3
+```
+
+---
+# tibble
+
+- 性質二: subset 的時候不一樣
+
+
+```r
+# Accessing non-existent columns:
+df$b
+```
+
+```
+## [1] 4 5 6
+```
+
+```r
+#&gt; [1] 4 5 6
+tbl$b
+```
+
+```
+## Warning: Unknown or uninitialised column: `b`.
+```
+
+```
+## NULL
+```
+
+```r
+#&gt; Warning: Unknown or uninitialised column: `b`.
+#&gt; NULL
+```
+
+---
+# tibble
+
+- 創建 tibble 跟 dataframe 一樣
+
+
+```r
+tibble(
+  x = 1:5, 
+  y = 1, 
+  z = x ^ 2 + y
+)
+```
+
+```
+## # A tibble: 5 x 3
+##       x     y     z
+##   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     1     1     2
+## 2     2     1     5
+## 3     3     1    10
+## 4     4     1    17
+## 5     5     1    26
+```
+
+---
+# tibble
+
+- `View()`
+- `glimse()`
+
+
+```r
+# View(iris)
+glimpse(iris)
+```
+
+```
+## Rows: 150
+## Columns: 5
+## $ Sepal.Length &lt;dbl&gt; 5.1, 4.9, 4.7, 4.6, 5.0, 5.4, 4.6, 5.0, 4.4, 4.9, 5.4, 4…
+## $ Sepal.Width  &lt;dbl&gt; 3.5, 3.0, 3.2, 3.1, 3.6, 3.9, 3.4, 3.4, 2.9, 3.1, 3.7, 3…
+## $ Petal.Length &lt;dbl&gt; 1.4, 1.4, 1.3, 1.5, 1.4, 1.7, 1.4, 1.5, 1.4, 1.5, 1.5, 1…
+## $ Petal.Width  &lt;dbl&gt; 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2, 0.2, 0.1, 0.2, 0…
+## $ Species      &lt;fct&gt; setosa, setosa, setosa, setosa, setosa, setosa, setosa, …
+```
+
+---
+# tibble
+
+- 之後主要資料都是用 dataframe
+- 推薦都把 dataframe 變成 tibble (純推薦，不換也可以)
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"self_contained": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

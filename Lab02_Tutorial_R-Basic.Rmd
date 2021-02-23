@@ -1,0 +1,308 @@
+---
+title: "Lab02_R-Basic_Tutorial"
+subtitle: "R Briefing and TA part"
+author: "曾子軒 Dennis Tseng"
+institute: "台大新聞所 NTU Journalism"
+date: "2021/02/22"
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      self_contained: true
+---
+<style type="text/css">
+
+.remark-slide-content {
+    padding: 1em 1em 1em 1em;
+    font-size: 28px;
+}
+
+.my-one-page-font {
+  padding: 1em 1em 1em 1em;
+  font-size: 20px;
+  /*xaringan::inf_mr()*/
+}
+
+</style>
+
+```{r message=FALSE,warning=FALSE,echo=FALSE}
+
+```
+
+# Vectors 向量
+
+- **原子型態向量(Atomic vectors)**, 有六種類型: 邏輯logical, 整數integer, 浮點數double, 字符character, 複數complex, and 原始raw
+- 最常用的是前四種 logical, integer, double, character，atomic vectors 內的元素類型都相同(homogeneous)
+- **列表(Lists)**, 可以包含不同類型(heterogeneous)的元素
+
+```{r, out.width='45%', out.height='45%', echo=FALSE}
+   knitr::include_graphics('photo/Lab02_vector.jpg')
+```
+
+---
+# Atomic Vectos
+
+- `c(5,6)` 是 vectors, `5` 也是，等同於 `c(5)`
+- 用 `c()` 創建與拼接, 像是 `x = c(1,2)` 以及 `y = c(x, x[1], x[2])`
+- 用 ` length()` 獲取長度, 像是 `length(x) = 2`
+- 幾個特性: 再利用(recycling), 篩選(filtering), 向量化(vectorization)
+- arithmetic: 可以加減乘除, e.g. `c(2,5) + c(1,4)`
+
+---
+# Vector Operations
+
+- 常用函數 `seq(from, to, by)`, 分別代表開始, 終結, 間距 
+- 常用函數 `rep(x, times)`, 分別代表要重複的向量, 重複的次數
+
+```{r warning=FALSE}
+seq(from=5,to=30,by=5)
+seq(from=5,to=29,by=5)
+seq(from=1,to=2,by=0.2)
+```
+
+---
+
+# Vector Operations
+
+- 常用函數 `seq(from, to, by)`, 分別代表開始, 終結, 間距 
+- 常用函數 `rep(x, times)`, 分別代表要重複的向量, 重複的次數
+
+```{r warning=FALSE}
+rep(2,3)
+rep(c(1,3,5),3)
+rep(1:3, 2)
+```
+
+---
+# Vectorized/Vectorization
+
+- 向量化的特性有點難用文字說明
+- 原文: functions are applied element-wise to vectors
+
+```{r warning=FALSE}
+# 第一個跟第一個比
+c(1,2,4) > c(0,0,4)
+# 第一個跟第一個相加
+c(1,2,4) + c(0,0,4)
+# 取四捨五入
+round(c(1.2, 3.9, 0.4))
+sqrt(c(2,5,10))
+```
+
+---
+# Recycling
+
+- R 會自動回收長度不同的向量
+
+```{r warning=FALSE}
+# 自動延長前者
+c(1,2) + c(1,2,3,4,5) 
+# 等同 c(1,2,1,2,1) + c(1,2,3,4,5) 
+
+# 自動延長前者
+2*c(1,2,3,4,5)
+# 等同 c(2,2,2,2,2) + c(1,2,3,4,5) 
+```
+
+---
+# Filtering
+
+```{r warning=FALSE}
+a <- c(1,2,-6,8)
+a[a > 0]
+a > 0
+a[c(T, T, F, T)]
+```
+
+---
+# Filtering
+
+```{r warning=FALSE}
+# Assigment
+b <- c(3,5,9)
+b[b == 3] <- -1
+# subset()
+subset(b, b > 3)
+# which(): 告訴你 index
+which(b > 1)
+```
+
+---
+# Conversion/Coercion
+
+- 型態轉換
+ - Explicit coercion: `as.logical()`, `as.integer()`, `as.double()`, `as.character()`
+ - Implicit coercion: 因為 vector 內的元素具有相同型態，所在某些情況下，若元素型態不同，會被強制轉換
+---
+
+# Explicit coercion
+
+```{r}
+as.logical(c(1,0))
+as.integer(c(T,F))
+as.logical(c("T",F))
+as.character(c(1,0))
+```
+
+---
+
+# Implicit coercion
+
+```{r}
+c(T,0)
+c(T,'F')
+```
+
+---
+# Atomic Vectos: Summary
+
+- 創建向量: `c()`, `seq()`, `rep()`
+- 獲取元素: index with `[]`, `subset()`, `which()`的輔助
+- 操作向量: 加減乘除, 轉變型態 e.g. `as.logical()`
+- 重要特性
+  - 再利用(recycling): 長度不同會補上元素
+  - 篩選(filtering): 使用`[]`
+  - 向量化(vectorization): 函數與元素, 元素對元素
+
+---
+
+# Lists
+
+- 包含不同型態元素的 vectors
+- 創建 lists: `list()`
+
+```{r}
+i <- list(name="Chen", salary=50000, boss=F)
+j <- list("Lin", 70000, T)
+i
+j
+```
+
+---
+# List Operation
+
+- 加新的元素
+- 刪掉舊的元素
+```{r}
+i[4] <- "LV2"
+i[[5]] <- "Blue"
+i$friends <- "Huang"
+i$name <- NULL
+i$salary <- NULL
+names(i)
+```
+---
+
+# List Operation
+
+- 加新的元素
+- 刪掉舊的元素
+```{r}
+i
+```
+---
+
+# Lists Opreation
+
+- list 可以有很多層，變得比較複雜，離我們習慣的 table 很遠，但它很常見，知道怎麼用會比較好
+
+```{r}
+k <- list("a", list(1, list("3", "g")))
+k
+```
+
+---
+
+# Dataframe 
+
+- 資料框，平常用的 excel, spreadsheet 都是
+- 先 row 再 column
+
+```{r}
+head(iris, 3)
+```
+
+---
+
+# tidyverse
+
+- 有一個宇宙叫做 tidyverse = tidy + universe
+- 在這個宇宙裡有個叫做 tidy data 的 priciple
+- 由許多遵循共通 philosophy 的套件所組成
+- The tidyverse is a coherent system of packages for data manipulation, exploration and visualization that share a common design philosophy. 
+- 參考他們的 [manifesto](https://tidyverse.tidyverse.org/articles/manifesto.html)
+
+---
+# tibble
+
+- 也是 dataframe，但多了不同於原始 dataframe 的性質
+- 性質一: 列印的時候很舒適，不會全部印出來
+
+```{r}
+# install.packages("tidyverse")
+library("tidyverse")
+# iris
+as_tibble(iris)
+```
+
+---
+# tibble
+
+- 性質二: subset 的時候不一樣
+
+```{r}
+df <- data.frame(a = 1:3, bc = 4:6)
+tbl <- tibble(a = 1:3, bc = 4:6)
+df[, "a"]
+tbl[, "a"]
+```
+
+---
+# tibble
+
+- 性質二: subset 的時候不一樣
+
+```{r}
+# Accessing non-existent columns:
+df$b
+#> [1] 4 5 6
+tbl$b
+#> Warning: Unknown or uninitialised column: `b`.
+#> NULL
+```
+
+---
+# tibble
+
+- 創建 tibble 跟 dataframe 一樣
+
+```{r}
+tibble(
+  x = 1:5, 
+  y = 1, 
+  z = x ^ 2 + y
+)
+```
+
+---
+# tibble
+
+- `View()`
+- `glimse()`
+
+```{r}
+# View(iris)
+glimpse(iris)
+```
+
+---
+# tibble
+
+- 之後主要資料都是用 dataframe
+- 推薦都把 dataframe 變成 tibble (純推薦，不換也可以)
+
+
