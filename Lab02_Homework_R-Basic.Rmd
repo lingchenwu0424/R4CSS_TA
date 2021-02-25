@@ -1,7 +1,7 @@
 ---
 title: "Lab02_Homework_R-Basic"
 author: "你是誰 R09342000 新聞所碩五"
-date: "2021/02/22"
+date: "2021/03/02"
 output:
   html_document:
     number_sections: no
@@ -16,9 +16,9 @@ output:
 knitr::opts_chunk$set(echo = TRUE, results = 'hold', comment = '#>', error = TRUE)
 ```
 
-## 作業目的：atomic vector and list
+## 作業目的: atomic vector and list
 
-這份作業希望能夠讓你實際操作向量。
+這份作業希望能夠讓你熟悉操作向量。
 
 ## 作業: RMarkdown 語法練習
 

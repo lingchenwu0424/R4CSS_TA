@@ -1,9 +1,9 @@
 ---
 title: "Lab02_R-Basic_Tutorial"
-subtitle: "R Briefing and TA part"
+subtitle: "vector, list, and dataframe"
 author: "曾子軒 Dennis Tseng"
 institute: "台大新聞所 NTU Journalism"
-date: "2021/02/22"
+date: "2021/03/02"
 output:
   xaringan::moon_reader:
     css: [default, metropolis, metropolis-fonts]
@@ -28,10 +28,6 @@ output:
 }
 
 </style>
-
-```{r message=FALSE,warning=FALSE,echo=FALSE}
-
-```
 
 # Vectors 向量
 
