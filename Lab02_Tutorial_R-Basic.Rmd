@@ -271,7 +271,7 @@ knitr::include_graphics(list_of_plots[4])
 - x[[1]]
 - x[[1]][[1]]
 
-source: R4DS
+source: [R4DS](https://r4ds.had.co.nz/vectors.html#lists-of-condiments)
 
 ---
 
