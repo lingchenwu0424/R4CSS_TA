@@ -6,6 +6,7 @@
 * LAB 02 Tutorial R-Basic [slide](https://p4css.github.io/R4CSS_TA/Lab02_Tutorial_R-Basic.html)   
 * LAB 02 Homework R-Basic [Rmd](https://github.com/P4CSS/R4CSS_TA/blob/main/Lab02_Homework_R-Basic.Rmd), [html](https://p4css.github.io/R4CSS_TA/Lab02_Homework_R-Basic.html)        
 * AS 01 R-Basic [Rmd](https://github.com/P4CSS/R4CSS_TA/blob/main/AS01_R-Basic.Rmd), [html](https://p4css.github.io/R4CSS_TA/AS01_R-Basic.html)        
+* LAB 01 Homework RMarkdown reference [Rmd](https://github.com/P4CSS/R4CSS_TA/blob/main/Lab01_Homework_RMarkdown_ref.Rmd), [html](https://p4css.github.io/R4CSS_TA/Lab01_Homework_RMarkdown_ref.html)        
 
 ### week01_02/22
 
