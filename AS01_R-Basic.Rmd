@@ -39,9 +39,9 @@ knitr::opts_chunk$set(echo = TRUE, results = 'hold', comment = '#>', error = TRU
 
 下方提供 Readr 所開放的[臺灣 COVID-19 確診病例資料](https://github.com/readr-media/readr-data/tree/master/covid-19)，並已經抓出前十位確診者的性別、年齡、狀態。請分別印出這十位患者中
 
-- (1)第 3 位確診者的性別   
-- (2)第 5 位確診者的年齡   
-- (3)奇數位確診者的狀態
+(1) 第 3 位確診者的性別   
+(2) 第 5 位確診者的年齡   
+(3) 奇數位確診者的狀態
 
 ```{r}
 df <- read.csv("data/AS01/covid19_comfirmed_case_taiwan.csv")
@@ -66,8 +66,8 @@ vector_state <- df$state[1:10]
 
 同上方資料 
 
-- (1)請以 `vector_gender_first10_last10` 為名，利用`[]`，創造出一個包含前十位患者與末十位患者性別的 vector。   
-- (2)請以 `df_first10` 為名，將 `vector_gender`, `vector_age`, `vector_state` 拼成一個 dataframe，並將結果印出。   
+(1) 請以 `vector_gender_first3_last3` 為名，利用`[]`，創造出一個包含前 3 位患者與末 3 位患者性別的 vector。   
+(2) 請以 `df_first10` 為名，將 `vector_gender`, `vector_age`, `vector_state` 拼成一個 dataframe，並將結果印出。   
 
 ```{r}
 ### your code
@@ -81,10 +81,10 @@ vector_state <- df$state[1:10]
 
 下方列出部分新聞所本學期開設課程，包含教師姓氏, 課程名稱, 修課限制人數, 開設單位等。請協助
 
-- (1)抓出教師姓氏   
-- (2)計算學生人數平均   
-- (3)修改`student_quota`元素，將修課限制人數**加倍**，造成老師困擾  
-- (4)在 list 中插入新元素 `weekday`，內容為 `c("三","二","五","三")`，並將`list_journalism_sample$weekday`印出
+(1) 抓出教師姓氏   
+(2) 計算學生人數平均   
+(3) 修改`student_quota`元素，將修課限制人數**加倍**，並將 `list_journalism_sample$student_quota` 印出，造成老師困擾   
+(4) 在 list 中插入新元素 `weekday`，內容為 `c("三","二","五","三")`，並將`list_journalism_sample$weekday`印出
 
 ```{r}
 list_journalism_sample <-
@@ -105,6 +105,7 @@ list_journalism_sample <-
 # output should be
 #> [1] "chen" "hung" "liu"  "lee" 
 #> [1] 16
+#> [1] 40 30 18 40
 #> [1] "三" "二" "五" "三"
 ```
 
@@ -112,11 +113,11 @@ list_journalism_sample <-
 
 在回到臺灣 COVID-19 確診病例資料。
 
-- (1)請創建一個名為 `df_first20` 的 dataframe，裡面僅有前 20 位確診者  
-- (2)請印出 `df_first20` 中女性(female)的年齡(age)  
-- (3)請印出 `df_first20` 中編號(patient_id)為奇數者的確診日期(released_date)
-- (4)請印出 `df_first20` 中五十歲以上(Above 50)者女性的的狀態(state)
-- (5)請印出 `df_first20` 中，五十歲以上者**以外**所有人的旅遊史(tourism_history)  
+(1) 請創建一個名為 `df_first20` 的 dataframe，裡面僅有前 20 位確診者   
+(2) 請印出 `df_first20` 中女性(female)的年齡(age)   
+(3) 請印出 `df_first20`    中編號(patient_id)為奇數者的確診日期(released_date)
+(4) 請印出 `df_first20` 中五十歲以上(Above 50)者女性的的狀態(state)   
+(5) 請印出 `df_first20` 中，五十歲以上者**以外**所有人的旅遊史(tourism_history)     
 
 
 ```{r}

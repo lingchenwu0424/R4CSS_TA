@@ -368,13 +368,13 @@ div.tocify {
 <div id="vector-基礎操作-15-分" class="section level3">
 <h3>vector 基礎操作 (15 分)</h3>
 <p>下方提供 Readr 所開放的<a href="https://github.com/readr-media/readr-data/tree/master/covid-19">臺灣 COVID-19 確診病例資料</a>，並已經抓出前十位確診者的性別、年齡、狀態。請分別印出這十位患者中</p>
-<ul>
-<li>(1)第 3 位確診者的性別<br />
+<ol style="list-style-type: decimal">
+<li>第 3 位確診者的性別<br />
 </li>
-<li>(2)第 5 位確診者的年齡<br />
+<li>第 5 位確診者的年齡<br />
 </li>
-<li>(3)奇數位確診者的狀態</li>
-</ul>
+<li>奇數位確診者的狀態</li>
+</ol>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/AS01/covid19_comfirmed_case_taiwan.csv&quot;</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>vector_gender <span class="ot">&lt;-</span> df<span class="sc">$</span>gender[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>vector_age <span class="ot">&lt;-</span> df<span class="sc">$</span>age[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
@@ -395,11 +395,11 @@ div.tocify {
 <div id="vector-與-data-frame-20-分" class="section level3">
 <h3>vector 與 data frame (20 分)</h3>
 <p>同上方資料</p>
-<ul>
-<li>(1)請以 <code>vector_gender_first10_last10</code> 為名，利用<code>[]</code>，創造出一個包含前十位患者與末十位患者性別的 vector。<br />
+<ol style="list-style-type: decimal">
+<li>請以 <code>vector_gender_first3_last3</code> 為名，利用<code>[]</code>，創造出一個包含前 3 位患者與末 3 位患者性別的 vector。<br />
 </li>
-<li>(2)請以 <code>df_first10</code> 為名，將 <code>vector_gender</code>, <code>vector_age</code>, <code>vector_state</code> 拼成一個 dataframe，並將結果印出。</li>
-</ul>
+<li>請以 <code>df_first10</code> 為名，將 <code>vector_gender</code>, <code>vector_age</code>, <code>vector_state</code> 拼成一個 dataframe，並將結果印出。</li>
+</ol>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">### your code</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (1)</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -408,15 +408,15 @@ div.tocify {
 <div id="list-20-分" class="section level3">
 <h3>list (20 分)</h3>
 <p>下方列出部分新聞所本學期開設課程，包含教師姓氏, 課程名稱, 修課限制人數, 開設單位等。請協助</p>
-<ul>
-<li>(1)抓出教師姓氏<br />
+<ol style="list-style-type: decimal">
+<li>抓出教師姓氏<br />
 </li>
-<li>(2)計算學生人數平均<br />
+<li>計算學生人數平均<br />
 </li>
-<li>(3)修改<code>student_quota</code>元素，將修課限制人數<strong>加倍</strong>，造成老師困擾<br />
+<li>修改<code>student_quota</code>元素，將修課限制人數<strong>加倍</strong>，並將 <code>list_journalism_sample$student_quota</code> 印出，造成老師困擾<br />
 </li>
-<li>(4)在 list 中插入新元素 <code>weekday</code>，內容為 <code>c(&quot;三&quot;,&quot;二&quot;,&quot;五&quot;,&quot;三&quot;)</code>，並將<code>list_journalism_sample$weekday</code>印出</li>
-</ul>
+<li>在 list 中插入新元素 <code>weekday</code>，內容為 <code>c(&quot;三&quot;,&quot;二&quot;,&quot;五&quot;,&quot;三&quot;)</code>，並將<code>list_journalism_sample$weekday</code>印出</li>
+</ol>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>list_journalism_sample <span class="ot">&lt;-</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">teacher=</span><span class="fu">c</span>(<span class="st">&quot;chen&quot;</span>,<span class="st">&quot;hung&quot;</span>,<span class="st">&quot;liu&quot;</span>,<span class="st">&quot;lee&quot;</span>),</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">course=</span><span class="fu">c</span>(<span class="st">&quot;新聞寫作&quot;</span>,<span class="st">&quot;數位新聞法規與倫理&quot;</span>,<span class="st">&quot;採訪寫作二&quot;</span>,<span class="st">&quot;    新聞編輯與資訊設計&quot;</span>),</span>
@@ -435,20 +435,22 @@ div.tocify {
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># output should be</span></span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;chen&quot; &quot;hung&quot; &quot;liu&quot;  &quot;lee&quot; </span></span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 16</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;三&quot; &quot;二&quot; &quot;五&quot; &quot;三&quot;</span></span></code></pre></div>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 40 30 18 40</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;三&quot; &quot;二&quot; &quot;五&quot; &quot;三&quot;</span></span></code></pre></div>
 </div>
 <div id="data-frame-35-分" class="section level3">
 <h3>data frame (35 分)</h3>
 <p>在回到臺灣 COVID-19 確診病例資料。</p>
-<ul>
-<li>(1)請創建一個名為 <code>df_first20</code> 的 dataframe，裡面僅有前 20 位確診者<br />
+<ol style="list-style-type: decimal">
+<li>請創建一個名為 <code>df_first20</code> 的 dataframe，裡面僅有前 20 位確診者<br />
 </li>
-<li>(2)請印出 <code>df_first20</code> 中女性(female)的年齡(age)<br />
+<li>請印出 <code>df_first20</code> 中女性(female)的年齡(age)<br />
 </li>
-<li>(3)請印出 <code>df_first20</code> 中編號(patient_id)為奇數者的確診日期(released_date)</li>
-<li>(4)請印出 <code>df_first20</code> 中五十歲以上(Above 50)者女性的的狀態(state)</li>
-<li>(5)請印出 <code>df_first20</code> 中，五十歲以上者<strong>以外</strong>所有人的旅遊史(tourism_history)</li>
-</ul>
+<li>請印出 <code>df_first20</code> 中編號(patient_id)為奇數者的確診日期(released_date)</li>
+<li>請印出 <code>df_first20</code> 中五十歲以上(Above 50)者女性的的狀態(state)<br />
+</li>
+<li>請印出 <code>df_first20</code> 中，五十歲以上者<strong>以外</strong>所有人的旅遊史(tourism_history)</li>
+</ol>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/AS01/covid19_comfirmed_case_taiwan.csv&quot;</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="do">### your code</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># (1)</span></span>

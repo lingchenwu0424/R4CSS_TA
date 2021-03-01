@@ -354,25 +354,24 @@ div.tocify {
 
 <div id="作業目的-atomic-vector-and-list" class="section level2">
 <h2>作業目的: atomic vector and list</h2>
-<p>這份作業希望能夠讓你熟悉操作向量。</p>
+<p>這份作業希望能夠讓你熟悉操作 atomic vector and list。</p>
 </div>
 <div id="作業-rmarkdown-語法練習" class="section level2">
 <h2>作業: RMarkdown 語法練習</h2>
 <p>滿分共 100 分。</p>
 <div id="a.-vector-50-分" class="section level3">
 <h3>A. vector (50 分)</h3>
-<ul>
-<li>(1)<code>vector_01_left</code> 與 <code>vector_01_right</code> 長度不等，請解釋兩者為什麼相乘不會出現 error，又為什麼得到那個值？</li>
-<li>(1)回答:</li>
-</ul>
+<ol style="list-style-type: decimal">
+<li>底下的 code chunk 中，有兩個長度不同的向量，<code>vector_01_left</code> 與 <code>vector_01_right</code> ，兩者相乘後並沒有出現錯誤。請解釋為什麼他們可以相乘而不會出現 error，結果的值又是怎麼計算得到的？<br> <strong>把解釋寫在這</strong>:</li>
+</ol>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (1)</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>vector_01_left <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">12</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>vector_01_right <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>vector_01_left<span class="sc">*</span>vector_01_right</span></code></pre></div>
 <pre><code>#&gt; [1]  2  9 10 30 24</code></pre>
-<ul>
-<li>(2)請利用兩種方法，將<code>vector_02</code>變成<code>c(2,3,5)</code></li>
-</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>請利用兩種<strong>不同的</strong>方法，將<code>vector_02</code>變成<code>c(2,3,5)</code>，並將結果分別存到 <code>vector_03</code> 和 <code>vector_04</code> 裡面。但不能直接使用 assignment 的偷懶做法 (assignment 是指 <code>vector_03 &lt;- c(2,3,5)</code> )</li>
+</ol>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># (2)</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>vector_02 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="do">### your code</span></span>
@@ -383,17 +382,28 @@ div.tocify {
 <div id="b.-list-50-分" class="section level3">
 <h3>B. list (50 分)</h3>
 <p>底下有兩個 list，請撰寫程式</p>
-<ul>
-<li>(1)利用 <code>[]</code>, <code>[[]]</code>, <code>$</code>，無論哪種，抓出<code>list_true</code>的 <code>TRUE</code> 元素</li>
-<li>(2)利用 assignment 以外的方法把<code>list_true</code> 變成 <code>list_final</code>(assignment的意思是 <code>list_true &lt;- list_final</code>)</li>
-</ul>
+<ol style="list-style-type: decimal">
+<li>利用 <code>[]</code>, <code>[[]]</code>, <code>$</code>，無論哪種，抓出<code>list_true</code>的 <code>TRUE</code> 元素，底下有附上預期的結果可以用來比對自己的答案是否正確</li>
+<li>利用 assignment 以外的方法 (assignment 是指 <code>list_true &lt;- list_final</code>)，將 <code>list_true</code> 的值變成 <code>list_final</code> 的值，並利用<code>identical(list_true, list_final)</code>檢查兩者是否相等</li>
+</ol>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>list_true  <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">a=</span><span class="st">&quot;bcd&quot;</span>,<span class="at">c=</span><span class="fu">list</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="st">&quot;g&quot;</span>),<span class="dv">5</span>,<span class="at">abc=</span><span class="fu">list</span>(<span class="dv">6</span>,<span class="dv">4</span>,<span class="fu">list</span>(<span class="cn">TRUE</span>)))</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>list_final <span class="ot">&lt;-</span> <span class="fu">list</span>(        <span class="at">c=</span><span class="fu">list</span>(<span class="dv">1</span>,  <span class="st">&quot;g&quot;</span>),<span class="dv">5</span>,<span class="at">abc=</span><span class="fu">list</span>(<span class="dv">6</span>,<span class="dv">4</span>,<span class="fu">list</span>(<span class="cn">FALSE</span>)))</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="do">### your code</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># (1)</span></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># (2)</span></span></code></pre></div>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># expected output</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] TRUE</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># (2)</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># check</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(list_true, list_final)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># expected output</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] TRUE</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 現在是 FALSE 若你改動成功會變成 TRUE</span></span></code></pre></div>
+<pre><code>#&gt; [1] FALSE</code></pre>
 </div>
 </div>
 
