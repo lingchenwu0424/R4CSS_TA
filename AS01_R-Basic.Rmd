@@ -137,8 +137,7 @@ df <- read.csv("data/AS01/covid19_comfirmed_case_taiwan.csv")
 #>  [1] "Above 50" "Above 50" "Above 50" "Above 50" "Above 70" "Above 70"
 #>  [7] "Above 40" "Above 20" "Above 50" "Above 40"
 #> [1] "2020-02-06"
-#>  [1] "released" "isolated" "isolated" "released" "released" "released"
-#>  [7] "released" "isolated" "isolated" "isolated"
-#>  [1] "Yes" "No"  "Yes" "Yes" "Yes" "Yes" "Yes" "Yes" "No"  "No"
+#> [1] "released" "isolated" "released" "released" "isolated"
+#>  [1] "Yes" "Yes" "No"  "Yes" "Yes" "Yes" "Yes" "Yes" "Yes" "No"
 ```
 
