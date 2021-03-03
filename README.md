@@ -1,5 +1,10 @@
 # R4CSS_TA
 
+### week03_03/09
+
+* LAB 03 Tutorial R-Intermediate [slide](https://p4css.github.io/R4CSS_TA/) (under construction)  
+* LAB 03 Homework R-Basic [Rmd](https://github.com/P4CSS/R4CSS_TA/blob/main/Lab03_Homework_R-Intermediate.Rmd), [html](https://p4css.github.io/R4CSS_TA/Lab03_Homework_R-Intermediate.html)        
+* AS 02 R-Basic [Rmd](https://github.com/P4CSS/R4CSS_TA/blob/main/AS02_R-Intermediate.Rmd), [html](https://p4css.github.io/R4CSS_TA/AS02_R-Intermediate.html) 
 
 ### week02_03/02
 
