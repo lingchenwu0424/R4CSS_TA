@@ -1,0 +1,218 @@
+---
+title: "Lab03_R-Intermediate_Tutorial"
+subtitle: "for loop, if else, functions, and others"
+author: "曾子軒 Dennis Tseng"
+institute: "台大新聞所 NTU Journalism"
+date: "2021/03/09"
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      self_contained: true
+---
+<style type="text/css">
+
+.remark-slide-content {
+    padding: 1em 1em 1em 1em;
+    font-size: 28px;
+}
+
+.my-one-page-font {
+  padding: 1em 1em 1em 1em;
+  font-size: 20px;
+  /*xaringan::inf_mr()*/
+}
+
+</style>
+
+# Path (路徑) and Directory (目錄)
+
+- Path, 資料夾的地址
+ - 我剛剛在`"台大新聞所四樓的 415 研究室裡面的沙發上睡覺"`
+ - **absolute path 絕對路徑**，以上面的例子來說，因為你們不在 415 教室，所以我會用完整的地址`"台大新聞所四樓的 415 研究室裡面的沙發上"`描述我的位置，這是"絕對"的地址
+ - **relative path 相對路徑**，以上面的例子來說，如果有同學剛剛也在 415 教室裡面，我就會跟他說我在`"沙發上"`，因為同學已經在那個空間了，這是"相對"的地址
+- 實際案例
+ - `"/Users/dennistseng/Documents/R1092/data/Lab03/ARG.csv"`
+ - `"data/Lab03/ARG.csv"`
+---
+# Path (路徑) and Directory (目錄)
+
+- Directory, 現在在哪個資料夾
+ - 舉例來說，我剛剛在的地方是 415 教室
+ - working directory 代表你的 R 運行時讀檔案的起始位置
+- 尋找自己的 directory
+ - `getwd()`
+ - `setwd()`
+ - 缺點是 not self-contained, not portable
+ - 別人不方便協作、資料夾變動不好恢復、同時有多專案進行時會混亂
+
+---
+# R Project (R 專案)
+
+- R project, R 專案
+ - 使用 R 專案有很多好處，其中之一在於讓你的路徑保持乾淨
+ - 打開 R4CSS_TA 裡面的 R4CSS_TA.Rproj 
+ - 我寫 `read_csv("data/Lab03/ARG.csv")` 上傳 Github，下載後不用改路徑，但若寫 `"Users/子軒/碩一/學校事務/不想寫程式/R語言/R4CSS_TA/data/Lab03/ARG.csv"` 別人就沒辦法用
+ - working directory 就會是R project 檔案所在的資料夾 
+ 
+---
+# R Project (R 專案)
+
+```{r, out.width='45%', out.height='45%', echo=FALSE}
+knitr::include_graphics('photo/Lab03_rproj01.jpg')
+knitr::include_graphics('photo/Lab03_rproj02.jpg')
+```
+---
+# R Project (R 專案)
+
+- GOOD
+```{r, out.width='100%', out.height='100%', echo=FALSE}
+knitr::include_graphics('photo/Lab03_rproj03.jpg')
+```
+
+- BAD
+```{r, out.width='100%', out.height='100%', echo=FALSE}
+knitr::include_graphics('photo/Lab03_rproj04.jpg')
+```
+---
+# 遇到 R 問題
+
+- 題目
+ - 請印出 `df_first20` 中編號(patient_id)為奇數者的確診日期(released_date)
+- 問題
+ - 要怎麼抓 dataframe 裡面的值
+ - 要怎麼抓奇數
+
+---
+# 遇到 R 問題
+
+- 知道關鍵字: [stackoverflow](https://stackoverflow.com/questions/7448881/how-to-access-single-elements-in-a-table-in-r)
+ - ` r your problem site:stackoverflow.com`
+ - `R dataframe element site:stackoverflow.com`
+ - result `How to access single elements in a table in R`
+- 不知道關鍵字: 先在 google 打大方向
+ - [`R dataframe tutorial`](http://www.r-tutor.com/r-introduction/data-frame)
+-  不知道關鍵字: 中英電子書看章節名稱與標題
+ - [`輕鬆學習 R 語言`](https://yijutseng.github.io/DataScienceRBook/manipulation.html#subset)
+ - [`R 資料科學與統計`](https://bookdown.org/jefflinmd38/r4biost/dataobject.html#%E8%B3%87%E6%96%99%E6%A1%86%E6%9E%B6%E7%9A%84%E4%B8%8B%E6%A8%99%E8%88%87%E7%B4%A2%E5%BC%95-data-frame-index)
+- 不知道關鍵字: 看 Datacamp 的時候留意標題
+ - [Introduction to R](https://campus.datacamp.com/courses/free-introduction-to-r/chapter-5-data-frames?ex=6)
+ - `Selection of data frame elements`
+
+---
+
+# For loop 迴圈
+
+- 迴圈的用途
+- 迴圈的構成元素
+- 迴圈的運行與停止
+- TRUE FALSE 等等
+https://bookdown.org/jefflinmd38/r4biost/vector.html
+- 迴圈的語法 for loop, while
+- 雙層迴圈, N 層迴圈
+
+---
+
+# For loop 迴圈
+
+- 迴圈的用途
+- 迴圈的構成元素
+- 迴圈的運行與停止
+- TRUE FALSE 等等
+https://bookdown.org/jefflinmd38/r4biost/vector.html
+- 迴圈的語法 for loop, while
+- 雙層迴圈, N 層迴圈
+---
+
+# 條件判斷 conditional statement
+
+- `+, -, x, /`
+- `%%, %/%`	
+- `>`, <, ==, !=
+- `&, &&, |, ||, xor`
+- `%in%`, ==
+
+```{r}
+
+```
+---
+
+
+# 條件判斷 conditional statement
+
+- 迴圈的用途
+- 迴圈的構成元素
+- 迴圈的運行與停止
+- 迴圈的語法 for loop, while
+- 雙層迴圈, N 層迴圈
+
+https://www.datainpoint.com/r-essentials/04-control-flows.html
+https://yijutseng.github.io/DataScienceRBook/controlstructure.html
+
+---
+
+# 條件判斷 conditional statement
+
+
+
+```{r}
+
+```
+---
+
+# dataframe 操作
+
+- 取特定列
+ - base R: `[,]`, `head()` and `tail()`
+ - tidyverse: `slice_**()`
+  - `slice()`, `slice_head()`, `slice_tail()`, `slice_sample()`
+- 取特定欄
+ - base R: `[,]`
+ - tidyverse: `select()` (next week)
+- 列與欄的合併
+ - base R: `rbind()` and `cbind()`
+ - tidyverse: `bind_rows()` and `bind_cols()`
+
+---
+
+# dataframe 列操作
+
+- base R
+```{r message=F, warning=F, results=F}
+df_head <- head(iris, 1)
+df_several <- iris[c(1:3), ]
+df_last <- tail(iris, 1)
+rbind(df_head, df_last)
+rbind(df_head, df_several)
+```
+
+- tidyverse
+```{r message=F, warning=F, results=F}
+df_head <- slice_head(iris, n= 1)
+df_several <- slice(iris, 1:3)
+df_last <- slice_tail(iris, n= 1)
+bind_rows(df_head, df_last)
+```
+
+---
+# dataframe 欄操作
+
+- base R
+```{r message=F, warning=F, results=F}
+iris_c12 <- iris[ ,c("Sepal.Length","Sepal.Width")]
+iris_c34 <- iris[ ,c(3:4)]
+iris_c1234 <- cbind(iris_c12,iris_c34)
+```
+
+- tidyverse (next week)
+```{r message=F, warning=F, results=F}
+iris_c12 <- select(iris, Sepal.Length, Sepal.Width)
+iris_c34 <- select(iris, 3, 4)
+iris_c1234 <- bind_cols(iris_c12,iris_c34)
+```
+
+
