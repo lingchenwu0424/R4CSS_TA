@@ -358,7 +358,7 @@ div.tocify {
 <p>第一題希望你用條件判斷和迴圈拼出一段程式碼，題目敘述看起來有些荒謬，但現實世界中有可以對應、正常一些的例子。</p>
 <p>第二題則是將第一題改寫成函數，這樣的過程在後面擷取網頁資料時會用到，舉例來說，你可能想抓 PTT 上 NTUCourse 板上的資料，第一次你寫了一個迴圈，半個月之後你想抓 KoreaDrama 板上的資料，所以改寫之前的程式碼，或者乾脆重新寫了一次，若相同的過程不斷重複，將前面的程式碼改寫成函數，就是相對較有效率的做法。</p>
 <p>第三題和前兩題無關，希望你寫一個輸入日期、輸出星座的函數，利用 Yahoo 或 Google Search 其實就可以搜到很多類似功能的網站，但現在的你也完全有能力寫出相同的東西。</p>
-<p>希望你在實作的過程中有所學習，雖然遇到 error 或卡住的時候會心情很悶，但這種壓力可以刺激成長，如同《一流的人如何保持顛峰》所說，在成為頂尖高手的路上需要拼搏(努力)，而拼搏需要面對建設性挫敗（productive failure），而非讓人愉悅的練習，希望在這份作業中你越挫越勇，並且記得休息唷</p>
+<p>希望你在實作的過程中有所學習，雖然遇到 error 或卡住的時候會心情很悶，但這種壓力可以刺激成長，如同《一流的人如何保持顛峰》所說，在成為頂尖高手的路上需要拼搏(努力)，而拼搏需要面對建設性挫敗（productive failure），而非讓人愉悅的練習，希望在這份作業中你越挫越勇，並且記得休息唷！</p>
 </div>
 <div id="作業-r-intermediate" class="section level2">
 <h2>作業: R-Intermediate</h2>
@@ -439,14 +439,15 @@ div.tocify {
 <h3>functions (ii) (40 分)</h3>
 <p>請撰寫一個函數 <code>get_zodiac()</code>，使用者輸入生日(字串或者數值，底下會舉例)，該函數便會告訴你所屬的星座。 不能使用他人開發好的現成函數，要自己寫喔。</p>
 <ul>
-<li><p>hint01: 可以利用條件判斷(if else)來比較日期</p></li>
-<li><p>hint02: 可以利用 <code>library(lubridate)</code> 處理使用者輸入的日期，有幾個可以用的函數譬如 <code>as_date()</code>, <code>month()</code>, <code>day()</code></p></li>
-<li><p>hith03: 如果對方亂輸入，要跳出一段訊息，這邊可以考慮用 if else 解決</p></li>
+<li><p>可以利用條件判斷(if else)來比較日期，你會用到很多 if else</p></li>
+<li><p>可以利用 <code>library(lubridate)</code> 處理使用者輸入的日期，有幾個可以用的函數譬如 <code>as_date()</code>, <code>month()</code>, <code>day()</code></p></li>
+<li><p>如果對方亂輸入，要跳出一段訊息，這邊也可以用 if else 解決</p></li>
 <li><p>預期結果舉例:</p></li>
 <li><p><code>get_zodiac(&quot;1996-09-25&quot;)</code> 會得到 <code>天秤座</code></p></li>
 <li><p><code>get_zodiac(&quot;1996-09-01&quot;)</code> 會得到 <code>處女座</code></p></li>
 <li><p><code>get_zodiac(19970101)</code> 會得到 <code>魔羯座</code></p></li>
 <li><p><code>get_zodiac(&quot;一九九八三月十四日&quot;)</code> 會得到 <code>請以&#39;YYYY-MM-DD&#39;格式輸入數字</code></p></li>
+<li><p>我會輸入上面以外的測資，所以不要僅寫針對上面四個輸入值的 if else 喔！</p></li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">### your code</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># get_zodiac &lt;- function(){</span></span>
