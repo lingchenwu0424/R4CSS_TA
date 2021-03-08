@@ -2,7 +2,6 @@
 
 ### week02_03/09
 
-- [作業檢討](https://p4css.github.io/R4CSS_TA/Lab01_Homework_RMarkdown_ref.html)
 - Datacamp 打開 [leaderboard](https://www.datacamp.com/enterprise/r1092-journalism-processing-and-visualization/leaderboard)
 - 問大家有沒有問題
 - 開始講講義、講 lab、講作業        
