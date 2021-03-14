@@ -1,0 +1,113 @@
+---
+title: "Lab04_Homework_Know-Your-Data"
+author: "你是誰 R09342000 新聞所碩五"
+date: "2021/03/16"
+output:
+  html_document:
+    number_sections: no
+    theme: united
+    highlight: tango
+    toc: yes
+    toc_float:
+      collapsed: no
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, results = 'hold', comment = '#>', error = TRUE)
+```
+
+## 作業目的: Know Your Data
+
+這份作業希望能夠讓你練習：
+
+a. 讀取資料
+b. 處理編碼
+c. 輸出資料
+d. 利用管線運算子(`%>%`)
+e. 基本的資料操作
+
+## 作業: Know Your Data
+
+滿分共 100 分。
+
+### A. importing data and data manipulation - csv (50 分) 
+
+本題目利用內政部統計處的[社會經濟資料服務平台](https://segis.moi.gov.tw/STAT/Web/Portal/STAT_PortalHome.aspx)所提供的資料，該平台有大量台灣的地理圖資與人口變數，之後找題目可以參考。我們使用的是 109 年第 4 季各縣市的結婚統計。
+
+1. data importing：請讀取請右方路徑的 csv 檔，路徑為 `data 資料夾 -> Lab04 資料夾 -> 109Q4_county_marriage.csv`，並取名為 `df_109Q4_county_marriage`。檔案讀進來後可能有亂碼，請任選課堂提到的亂碼處理方式（讀取前修改編碼、讀取設定參數、讀進後修改編碼），將檔案以正確編碼印出。若你是讀取前修改編碼，請用文字說明步驟，若你是設定參數或修改編碼，請在程式碼中用註解(`#`)說明你在做什麼！
+
+```{r message=FALSE,warning=FALSE}
+### your code
+```
+
+2. `slice()` and `mutate()`：這份資料有七個 column，而且第一列是中文欄位名稱。因為後續計算需要將幾個欄位轉成數值，所以請將我把第一列踢掉，接著將`結婚對數`, `結婚登記中外聯姻人數`, `結婚登記中外聯姻男性人數`, `結婚登記中外聯姻女性人數` 從 `character` 變成 `integer`，最後印出包含所有欄位的 tibble/dataframe（欄位名稱是英文的沒錯）
+
+```{r message=FALSE,warning=FALSE}
+### your code
+```
+
+3. `arrange()` and `slice()`：請篩選出 109 Q4 結婚對數最多的縣市，最後給我縣市代碼、縣市名稱、結婚對數的 tibble/dataframe
+
+```{r message=FALSE,warning=FALSE}
+### your code
+```
+
+4. `filer()` and `arrange()`：請先篩選出台灣六都，接著按照結婚對數由大到小排列，最後給我包含所有欄位的 tibble/dataframe
+
+```{r message=FALSE,warning=FALSE}
+### your code
+```
+
+5. `mutate()` and `arrange()` and `filter()`：請增加一個計算各縣市的結婚登記中外聯姻人數中，女性人數佔比的欄位，接著再增加一個欄位計算女性人數佔比的排名(最高為 1)，最後請篩選出聯姻人數女性比例**前三高**的列，並給我縣市代碼、縣市名稱、結婚登記中外聯姻人數、聯姻女性人數、聯姻女性人數比例、聯姻女性比例排名的 tibble/dataframe
+
+```{r message=FALSE,warning=FALSE}
+### your code
+```
+
+### B. importing data and data manipulation - excel (50 分) 
+
+本題目利用[台大碩士班考試入學報名人數資料](http://www.aca.ntu.edu.tw/gra/access/acc_mase/aboard-b07.asp?id=9)，原始檔案有 PDF 與 Excel，這邊選擇 Excel 檔案，讓你練習讀取 Excel 檔案以及資料操作。
+
+(1) data importing：請讀取右方路徑的 Excel 檔，路徑為 `data 資料夾 -> Lab04 資料夾 -> 台大_101學年度碩士班考試招生錄取情況一覽表.xls`，並取名為 `df_ntu_exam`。另外提醒一下，這個檔案是 .xls，也就是舊版的 excel 檔案，不是現在較常見的 .xlsx 喔！
+
+```{r message=FALSE,warning=FALSE}
+### your code
+```
+
+(2) `select()`：台大考試入學的碩士生分為一般組與在職組，請幫我拿掉"在職"相關的欄位。另外，也請幫我拿掉"口試"相關的欄位，完成後印出 tibble/dataframe
+
+提示：你可以先在 Excel 當中打開原始檔案看長相
+
+```{r message=FALSE,warning=FALSE}
+### your code
+```
+
+(3) `slice()` or `filter()` or `[,]`：觀察原始檔案可以發現，資料中前幾列包含總計、合計、小計，因為我只想看各系所的招生情況，所以請幫我抓取從中國文學系開始的資料，完成後印出 tibble/dataframe
+
+```{r message=FALSE,warning=FALSE}
+### your code
+```
+
+(4) `filter()`：觀察原始資料後發現，有些系組的報考人數的值為空，請幫我找出他們是誰，完成後印出 tibble/dataframe
+
+提示
+
+1. Excel 的空值讀進 R 之後會長什麼樣子
+2. 你很有可能會用到 `is.na()` 這個函數，如果 `NA` 丟進去，會得到 `TRUE`，以外會得到 `FALSE`
+3. `filter()` 的本質就是篩選符合特定條件的列，所以理想上你也可以篩選出報考人數的值為空的列
+
+```{r message=FALSE,warning=FALSE}
+### your code
+```
+
+(5) data exporting：請幫我將經過步驟 01 - 03 處理後的資料（讀檔案、踢掉在職欄位、踢掉口試欄位、踢掉總計列、合計列、小計列）儲存成 `df_ntu_exam_clean`，然後印出 tibble/dataframe。印出後接著再利用函數，將 `df_ntu_exam_clean` 輸出 .csv 到 Lab04 資料夾當中，請取名為 "NTU_exam_101_clean"。
+
+```{r message=FALSE,warning=FALSE}
+### your code
+```
+
+(6) `filter()` and `select()`：請幫我篩選出 "新聞研究所" 的資料感嘆一下 101 年的榮景，最後印出新聞所那列的系所、報考人數、招生名額、錄取人數、錄取率的 tibble/dataframe
+
+```{r message=FALSE,warning=FALSE}
+### your code
+```
