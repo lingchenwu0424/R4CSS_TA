@@ -3,8 +3,9 @@
 ### week04_03/16
 
 * LAB 04 Tutorial Know-Your-Data [slide](https://p4css.github.io/R4CSS_TA/)
-* LAB 04 Homework Know-Your-Data [Rmd](https://github.com/P4CSS/R4CSS_TA/blob/main/), [html](https://p4css.github.io/R4CSS_TA/)        
-* AS 03 Know-Your-Data [Rmd](https://github.com/P4CSS/R4CSS_TA/blob/main/Lab04_Homework_Know-Your-Data.Rmd), [html](https://p4css.github.io/R4CSS_TA/Lab04_Homework_Know-Your-Data.html) 
+* LAB 04 Homework Know-Your-Data [Rmd](https://github.com/P4CSS/R4CSS_TA/blob/main/Lab04_Homework_Know-Your-Data.Rmd), [html](https://p4css.github.io/R4CSS_TA/Lab04_Homework_Know-Your-Data.html) 
+* AS 03 Know-Your-Data [Rmd](https://github.com/P4CSS/R4CSS_TA/blob/main/AS03_Know-Your-Data.Rmd), [html](https://p4css.github.io/R4CSS_TA/AS03_Know-Your-Data.html) 
+
 
 ### week03_03/09
 
