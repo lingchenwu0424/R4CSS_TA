@@ -32,16 +32,32 @@ output:
 
 # 今日重點
 
-- 作業檢討
+- Lab04
+- AS03
+- 上週作業檢討
 - Package Installing & Loading
-- 路徑 & 中文編碼
 - Data Importing & Exporting
+
+Appendix
 - Pipe Operator
 - Basic Data Manipulation
+- 路徑 & 中文編碼
 
 ---
 
-# 作業檢討
+class: inverse, center, middle
+
+# [Lab04](https://p4css.github.io/R4CSS_TA/Lab04_Homework_Know-Your-Data.html)
+
+---
+
+class: inverse, center, middle
+
+# [AS03](https://p4css.github.io/R4CSS_TA/AS03_Know-Your-Data.html)
+
+---
+
+# 上週作業檢討
 
 - Lab03 B. Write your own functions
  - 比起一行直接寫完，將變數運算結果賦值更好理解
@@ -230,16 +246,300 @@ get_zodiac <- function(input_date) {
 
 # Package 套件
 
-- 安裝或載入遇到問題
- - 非常容易發生，可能是安裝時漏東西，或是本地電腦缺東西
- - `Error：package or namespace load failed for ‘tidyverse’ in loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]) there is no package called 'dplyr'`
- - 解決方法是看它的 error message 說什麼，上面說缺 `dplyr`
 - summary
  - 套件 = 書，安裝套件 = 下載書，載入套件 = 從圖書館借書
  - 安裝只要安裝一次就好，所以安裝完程式碼可以刪掉或註解掉
- - `# install.packages("stringr")`
- - 檔案的最上面先載入你的套件 `library(stringr)`
- - 底下就可以快樂的使用函數 `str_c("a","b")`
+ - 檔案的最上面先載入你的套件
+ - 底下開始寫你的程式碼
+
+ 
+```{r message=F,warning=F}
+# install.packages("stringr")
+library(stringr)
+str_c("a","b","c", sep = ";")
+```
+
+---
+# Data Importing & Exporting
+
+- 讀取和輸出檔案的幾個重點
+ - 檔案格式是什麼 e.g. .csv
+ - 檔案編碼是什麼 e.g. BIG5
+ - 輸出要輸出成什麼格式 e.g. .rds
+- 套件與函數的使用
+ - base R 就有函數 e.g. `read.csv()`
+ - tidyverse 底下的 [`library(readr)`](https://readr.tidyverse.org/)
+     - 檔案讀進來會是 tibble (之前提的，dataframe 的延伸)
+     - 預設編碼是 UTF8，可以避免許多問題
+- 今天內容
+ - 只講 tabulated data，也就是 table
+ - 之後還有 JSON, shapefile, html, etc.
+
+---
+# File Format 檔案格式 (table)
+
+- delimited file
+ - .csv, comma-separated values；.tsv, tab-separated values
+ - use `read.**()` or `readr::read_**()`
+- plain text
+ - .txt, use `readLines()` or `readr::read_file()`
+- excel
+ - .xls, .xlsx
+ - [`readxl::read_excel()`](https://readxl.tidyverse.org/), [`openxlsx::read.xlsx()`](https://ycphs.github.io/openxlsx/), [`XLConnect::loadWorkbook()`](https://github.com/miraisolutions/xlconnect)
+- google sheet
+ - [`googlesheets4::read_sheet()`](https://googlesheets4.tidyverse.org/)
+- PDF
+ - [`tabulizer::extract_tables()`](https://cran.r-project.org/web/packages/tabulizer/vignettes/tabulizer.html), [`pdftools::pdf_text()`](https://docs.ropensci.org/pdftools/)
+
+---
+
+# File Format - csv
+
+- arguments of `readr::read_csv()`
+ - `file`(檔案路徑)
+ - `delim`(用什麼區分, 預設是 ",")
+ - `col_names`(是否有預設的欄位名稱, 預設有)
+ - `locale`(地區，指編碼)
+ - `na`(missing value 長怎樣, 預設是 c("", "NA") )
+ - `skip`(要跳過幾列, 預設 = 0)
+
+---
+# File Format - csv
+
+```{r message=F, warning=F}
+library(tidyverse)
+file_p <- "data/df_zodiac_class.csv"
+df_zodiac_class <- 
+  read_csv(file_p)
+
+df_zodiac_class2 <- 
+  read_csv(file_p, col_names = F, skip = 1)
+
+df_zodiac_class3 <- 
+  read_csv(file_p, col_names = F, skip = 1, na = c("", "NA", "missing"))
+```
+
+---
+
+# File Format - excel
+
+- arguments of `readxl::read_excel()`
+ - `path`(檔案路徑)
+ - `sheet`(哪一張工作表，預設是第一張表)
+ - `range`(範圍，函數會去讀取所有不為空的欄與列)
+
+---
+# File Format - excel
+
+```{r message=F, warning=F}
+library(readxl)
+file_p2 <- "data/df_class03.xlsx"
+df_class03 <- read_excel(file_p2)
+# 發現有兩張工作表，先讀第一張
+df_class03_A <- read_excel(file_p2, sheet = "工作表1")
+# or
+df_class03_A <- read_excel(file_p2, sheet = 1)
+# 讀第二張
+df_class03_B <- read_excel(file_p2, sheet = "工作表2")
+# 讀第二張發現第三欄是註解
+df_class03_B <- read_excel(file_p2, sheet = "工作表2", range = "A1:B4")
+```
+
+
+---
+# File Encoding - csv
+
+- 讀檔案的時候，檔案編碼可能有問題，可以用 notepad ++ / 記事本 / excel 觀察編碼
+- 處理方式分三種，一種是直接更改原始檔案編碼後另存，一種是讀取檔案時設定參數，一種是讀取檔案後再來更改編碼
+- 也可以懶得打開其他程式，直接用 R 讀讀看跟它拼了，很熱血
+ - 如果欄位名稱是中文編碼又錯，很遺憾直接讀不進來
+ - 如果欄位名稱是英文編碼又錯，那就讀得進來，那你就要讀進來之後再改編碼
+
+---
+# File Encoding - csv
+- 範例一：[109Q1 實價登錄資料](https://plvr.land.moi.gov.tw/DownloadOpenData)
+- column name 跟內文都是中文，編碼不是 UTF8
+- 可以用 notepad ++ / 記事本 / excel 觀察編碼，或者直接用 R 讀讀看，跟它拼了
+
+```{r message=F, warning=F, eval=F}
+# 實價登錄
+df_land_109Q1_test <- read_csv("data/Lab04/109Q1_a_lvr_land_a_build.csv")
+# Error in make.names(x) : invalid multibyte string at '<bd>s<b8><b9>'
+
+df_land_109Q1_test <- read_csv("data/Lab04/109Q1_a_lvr_land_a_build.csv", locale = locale(encoding = "BIG5"))
+```
+
+---
+# File Encoding - csv
+
+- 範例二：[各縣市用電資料](https://www.taipower.com.tw/tc/sell_amt_city/sell_amt_city1.aspx) 
+- column name 是英文，所以讀得進來，但內文是中文，所以亂碼
+- 可以用 notepad ++ / 記事本 / excel 觀察編碼，或者直接用 R 讀讀看，跟它拼了
+
+```{r message=F, warning=F, eval=F}
+# 實價登錄
+df_electricity_usage_test <- read_csv("data/Lab04/electricity_usage.csv")
+# no error but 亂碼
+df_electricity_usage_test$county <- 
+  iconv(df_electricity_usage_test$county, from = "BIG5", to = "UTF8")
+```
+
+---
+# File Exporting
+
+- 函數與檔案格式
+ - 一般格式像是 .csv 用 `write.**()` or `readr::write_**()`，後者預設輸出 encoding 都是 UTF8，非常棒
+ - R 內建兩個函數可以讀寫 R 的物件
+     - 單一物件 .rds：`readRDS()/saveRDS()` or `readr::read_rds()/write_rds()`
+         - `write_rds(mtcars, "data/mtcars.rds")`
+     - 很多物件 .RData：`save()` or `load()` 
+         - e.g. `save(data1, data2, file = "data/d0102.RData")`
+
+---
+# File Exporting
+
+```{r message=F, warning=F}
+file_r <- "data/Lab04/"
+a <- 1
+b <- 2
+library(readr)
+
+### export
+write_rds(a, str_c(file_r, "a.rds"))
+save(a, b, file = str_c(file_r, "a_b.RData"))
+
+### load
+a_check <- read_rds(str_c(file_r, "a.rds"))
+
+rm(a)
+rm(b)
+load(file = str_c(file_r, "a_b.RData"))
+```
+
+
+---
+
+class: inverse, center, middle
+
+# The End
+
+---
+
+class: inverse, center, middle
+
+# Appendix
+
+---
+# Pipe Operator
+
+- 改變世界的管線運算子 pipe operator
+ - `%>%`：趴大於趴，趴趴熊的趴，意思是傳送，把左邊傳到右邊
+ - `library(magrittr)` or `library(tidyverse)`
+ - 國中數學： `k(g(f(x)))`，對 `x` 用 `f()` 接著 `g()` 接著 `k()`
+
+```{r message=F, warning=F, results=F}
+# set function
+five_time_add_two  <- function(x) { 5*x + 2 }
+four_time_add_one  <- function(x) { 4*x + 1 }
+two_time_minus_one <- function(x) { 2*x - 1 }
+
+# use function
+five_time_add_two(2)
+four_time_add_one(five_time_add_two(2))
+two_time_minus_one(four_time_add_one(five_time_add_two(2)))
+```
+
+---
+
+# Pipe Operator
+
+- 改變世界的管線運算子 pipe operator
+ - 看起來比較簡潔、後續操作 table 的時候非常方便
+ - 發音：描述 `%>%` 符號的時候用 pipe，在程式碼中描述用 then
+
+```{r message=F, warning=F, results=F}
+library(tidyverse)
+# base R
+two_time_minus_one(four_time_add_one(five_time_add_two(2)))
+# use pipe
+2 %>% 
+  five_time_add_two() %>% 
+  four_time_add_one() %>% 
+  two_time_minus_one()
+```
+
+---
+# Basic Data Manipulation
+
+- 資料操作 using [`library(dplyr)`](https://dplyr.tidyverse.org/)
+ - 利用 5 + 1 個動詞操作 table，第一個參數放 data，第二個參數看操作，發音是 DEE ply er，被稱為資料操作的文法
+- Verbs 5 + 1
+ - `select()` 選擇特定的 column
+ - `filter()` 篩選特定的 row
+ - `mutate()` 增加新的 column
+ - `arrange()` 按照變數性質排序
+ - `summarise()` 摘要變數結果
+ - `group_by()`	依照類別變數分組
+
+```{r message=F, warning=F, results=F}
+library(tidyverse)
+starwars
+```
+---
+# Basic Data Manipulation
+
+- Verbs 5 + 1
+ - `select()` 選擇特定的 column
+ - `filter()` 篩選特定的 row
+ - `mutate()` 增加新的 column
+ 
+```{r message=F, warning=F, results=F}
+# select()
+starwars[, c("name", "height")]
+select(starwars, name, height)
+starwars %>% select(name, height)
+# filter()
+starwars[starwars$height <= 160,]
+starwars %>% filter(height <= 160)
+# mutate()
+starwars$tall <- ifelse(starwars$height <= 160, 0, 1)
+starwars %>% mutate(tall = if_else(height <= 160, 0, 1))
+```
+
+---
+# Basic Data Manipulation
+- Verbs 5 + 1
+ - `arrange()` 按照變數性質排序
+ - `summarise()` 摘要變數結果
+ - `group_by()`	依照類別變數分組
+
+```{r message=F, warning=F, results=F}
+# arrange()
+starwars[order(starwars$height), ,drop = FALSE]
+starwars %>% arrange(height)
+# summarise() / summarize()
+aggregate(height ~ 1, starwars, FUN = max, na.rm=TRUE)
+starwars %>% summarise(height_max = max(height, na.rm = T))
+# group_by() and summarise()
+aggregate(height ~ gender, starwars, FUN = max, na.rm=TRUE)
+starwars %>% group_by(gender) %>% 
+  summarise(height_max = max(height, na.rm = T))
+```
+
+---
+# Basic Data Manipulation
+
+- 5 + 1 與其他
+ - row 操作：`filter()`, `slice()`,`arrange()`
+ - column 操作：`select()`, `mutate()`,`rename()`, `relocate()`
+ - group of rows：`summarise()` 搭配 `group_by()`
+- `dplyr` vs. `base R`：你該選擇 `dplyr` 的理由
+ 1. 資料操作就是一連串動作，上面的動詞讓你可以拆解動作
+ 2. 這些動詞的組合幾乎涵蓋了在 excel 會用到的操作
+ 3. 使用時不用加上引號或 `$` 就可以指涉資料欄位，適合 pipe
+ 4. 動詞內部參數具有高度一致性
+ 5. 函數底層改寫過效率高不用跑很久
+- 極力推薦、用生命推薦 `dplyr`，但你堅持不用也沒關係
 
 ---
 # 路徑和中文編碼
@@ -343,279 +643,12 @@ get_zodiac <- function(input_date) {
  - 顯示中文有問題可能是 bug，或是要調整系統編碼
 
 ---
-# Data Importing & Exporting
-
-- 讀取和輸出檔案的幾個重點
- - 檔案格式是什麼 e.g. .csv
- - 檔案編碼是什麼 e.g. BIG5
- - 輸出要輸出成什麼格式 e.g. .rds
-- 套件與函數的使用
- - base R 就有函數 e.g. `read.csv()`
- - tidyverse 底下的 [`library(readr)`](https://readr.tidyverse.org/)
-     - 檔案讀進來會是 tibble (之前提的，dataframe 的延伸)
-     - 預設編碼是 UTF8，可以避免許多問題
-- 今天內容
- - 只講 tabulated data，也就是 table
- - 之後還有 JSON, shapefile, html, etc.
-
----
-# File Format 檔案格式 (table)
-
-- delimited file
- - .csv, comma-separated values；.tsv, tab-separated values
- - use `read.**()` or `readr::read_**()`
-- plain text
- - .txt, use `readLines()` or `readr::read_file()`
-- excel
- - .xls, .xlsx
- - [`readxl::read_excel()`](https://readxl.tidyverse.org/), [`openxlsx::read.xlsx()`](https://ycphs.github.io/openxlsx/), [`XLConnect::loadWorkbook()`](https://github.com/miraisolutions/xlconnect)
-- google sheet
- - [`googlesheets4::read_sheet()`](https://googlesheets4.tidyverse.org/)
-- PDF
- - [`tabulizer::extract_tables()`](https://cran.r-project.org/web/packages/tabulizer/vignettes/tabulizer.html), [`pdftools::pdf_text()`](https://docs.ropensci.org/pdftools/)
-
----
-
-# File Format - csv
-
-- arguments of `readr::read_csv()`
- - `file`(檔案路徑)
- - `delim`(用什麼區分, 預設是 ",")
- - `col_names`(是否有預設的欄位名稱, 預設有)
- - `locale`(地區，指編碼)
- - `na`(missing value 長怎樣, 預設是 c("", "NA") )
- - `skip`(要跳過幾列, 預設 = 0)
-
----
-# File Format - csv
-
-```{r message=F, warning=F}
-library(tidyverse)
-file_p <- "data/df_zodiac_class.csv"
-df_zodiac_class <- 
-  read_csv(file_p)
-
-df_zodiac_class2 <- 
-  read_csv(file_p, col_names = F, skip = 1)
-
-df_zodiac_class3 <- 
-  read_csv(file_p, col_names = F, skip = 1, na = c("", "NA", "missing"))
-```
-
----
-
-# File Format - excel
-
-- arguments of `readxl::read_excel()`
- - `path`(檔案路徑)
- - `sheet`(哪一張工作表，預設是第一張表)
- - `range`(範圍，函數會去讀取所有不為空的欄與列)
-
----
-# File Format - excel
-
-```{r message=F, warning=F}
-library(readxl)
-file_p2 <- "data/df_class03.xlsx"
-df_class03 <- read_excel(file_p2)
-# 發現有兩張工作表，先讀第一張
-df_class03_A <- read_excel(file_p2, sheet = "工作表1")
-# or
-df_class03_A <- read_excel(file_p2, sheet = 1)
-# 讀第二張
-df_class03_B <- read_excel(file_p2, sheet = "工作表2")
-# 讀第二張發現第三欄是註解
-df_class03_B <- read_excel(file_p2, sheet = "工作表2", range = "A1:B4")
-```
 
 
----
-# File Encoding - csv
-
-- 前面提過，檔案編碼可能有問題，可以用 notepad ++ / 記事本 / excel 觀察編碼
-- 處理方式分三種，一種是直接更改原始檔案編碼後另存，一種是讀取檔案時設定參數，一種是讀取檔案後再來更改編碼
-- 也可以懶得打開其他程式，直接用 R 讀讀看跟它拼了，很熱血
- - 如果欄位名稱是中文編碼又錯，很遺憾直接讀不進來
- - 如果欄位名稱是英文編碼又錯，那就讀得進來，那你就要讀進來之後再改編碼
-
----
-# File Encoding - csv
-- 範例一：[109Q1 實價登錄資料](https://plvr.land.moi.gov.tw/DownloadOpenData)
-- column name 跟內文都是中文，編碼不是 UTF8
-- 可以用 notepad ++ / 記事本 / excel 觀察編碼，或者直接用 R 讀讀看，跟它拼了
-
-```{r message=F, warning=F, eval=F}
-# 實價登錄
-df_land_109Q1_test <- read_csv("data/Lab04/109Q1_a_lvr_land_a_build.csv")
-# Error in make.names(x) : invalid multibyte string at '<bd>s<b8><b9>'
-
-df_land_109Q1_test <- read_csv("data/Lab04/109Q1_a_lvr_land_a_build.csv", locale = locale(encoding = "BIG5"))
-```
-
----
-# File Encoding - csv
-
-- 範例二：[各縣市用電資料](https://www.taipower.com.tw/tc/sell_amt_city/sell_amt_city1.aspx) 
-- column name 是英文，所以讀得進來，但內文是中文，所以亂碼
-- 可以用 notepad ++ / 記事本 / excel 觀察編碼，或者直接用 R 讀讀看，跟它拼了
-
-```{r message=F, warning=F, eval=F}
-# 實價登錄
-df_electricity_usage_test <- read_csv("data/Lab04/electricity_usage.csv")
-# no error but 亂碼
-df_electricity_usage_test$county <- 
-  iconv(df_electricity_usage_test$county, from = "BIG5", to = "UTF8")
-```
-
----
-# File Exporting
-
-- 函數與檔案格式
- - 一般格式像是 .csv 用 `write.**()` or `readr::write_**()`，後者預設輸出 encoding 都是 UTF8，非常棒
- - R 內建兩個函數可以讀寫 R 的物件
-     - 單一物件 .rds：`readRDS()/saveRDS()` or `readr::read_rds()/write_rds()`
-         - `write_rds(mtcars, "data/mtcars.rds")`
-     - 很多物件 .RData：`save()` or `load()` 
-         - e.g. `save(data1, data2, file = "data/d0102.RData")`
-
----
-# File Exporting
-
-```{r message=F, warning=F}
-file_r <- "data/Lab04/"
-a <- 1
-b <- 2
-library(readr)
-
-### export
-write_rds(a, str_c(file_r, "a.rds"))
-save(a, b, file = str_c(file_r, "a_b.RData"))
-
-### load
-a_check <- read_rds(str_c(file_r, "a.rds"))
-
-rm(a)
-rm(b)
-load(file = str_c(file_r, "a_b.RData"))
-```
-
----
-# Pipe Operator
-
-- 改變世界的管線運算子 pipe operator
- - `%>%`：趴大於趴，趴趴熊的趴，意思是傳送，把左邊傳到右邊
- - `library(magrittr)` or `library(tidyverse)`
- - 國中數學： `k(g(f(x)))`，對 `x` 用 `f()` 接著 `g()` 接著 `k()`
-
-```{r message=F, warning=F, results=F}
-# set function
-five_time_add_two  <- function(x) { 5*x + 2 }
-four_time_add_one  <- function(x) { 4*x + 1 }
-two_time_minus_one <- function(x) { 2*x - 1 }
-
-# use function
-five_time_add_two(2)
-four_time_add_one(five_time_add_two(2))
-two_time_minus_one(four_time_add_one(five_time_add_two(2)))
-```
-
----
-
-# Pipe
-
-- 改變世界的管線運算子 pipe operator
- - 看起來比較簡潔、後續操作 table 的時候非常方便
- - 發音：描述 `%>%` 符號的時候用 pipe，在程式碼中描述用 then
-
-```{r message=F, warning=F, results=F}
-library(tidyverse)
-# base R
-two_time_minus_one(four_time_add_one(five_time_add_two(2)))
-# use pipe
-2 %>% 
-  five_time_add_two() %>% 
-  four_time_add_one() %>% 
-  two_time_minus_one()
-```
-
----
-# Basic Data Manipulation
-
-- 資料操作 using [`library(dplyr)`](https://dplyr.tidyverse.org/)
- - 利用 5 + 1 個動詞操作 table，第一個參數放 data，第二個參數看操作，發音是 DEE ply er，被稱為資料操作的文法
-- Verbs 5 + 1
- - `select()` 選擇特定的 column
- - `filter()` 篩選特定的 row
- - `mutate()` 增加新的 column
- - `arrange()` 按照變數性質排序
- - `summarise()` 摘要變數結果
- - `group_by()`	依照類別變數分組
-
-```{r message=F, warning=F, results=F}
-library(tidyverse)
-starwars
-```
----
-# Basic Data Manipulation
-
-- Verbs 5 + 1
- - `select()` 選擇特定的 column
- - `filter()` 篩選特定的 row
- - `mutate()` 增加新的 column
- 
-```{r message=F, warning=F, results=F}
-# select()
-starwars[, c("name", "height")]
-select(starwars, name, height)
-starwars %>% select(name, height)
-# filter()
-starwars[starwars$height <= 160,]
-starwars %>% filter(height <= 160)
-# mutate()
-starwars$tall <- ifelse(starwars$height <= 160, 0, 1)
-starwars %>% mutate(tall = if_else(height <= 160, 0, 1))
-```
-
----
-# Basic Data Manipulation
-- Verbs 5 + 1
- - `arrange()` 按照變數性質排序
- - `summarise()` 摘要變數結果
- - `group_by()`	依照類別變數分組
-
-```{r message=F, warning=F, results=F}
-# arrange()
-starwars[order(starwars$height), ,drop = FALSE]
-starwars %>% arrange(height)
-# summarise() / summarize()
-aggregate(height ~ 1, starwars, FUN = max, na.rm=TRUE)
-starwars %>% summarise(height_max = max(height, na.rm = T))
-# group_by() and summarise()
-aggregate(height ~ gender, starwars, FUN = max, na.rm=TRUE)
-starwars %>% group_by(gender) %>% 
-  summarise(height_max = max(height, na.rm = T))
-```
-
----
-# Basic Data Manipulation
-
-- 5 + 1 與其他
- - row 操作：`filter()`, `slice()`,`arrange()`
- - column 操作：`select()`, `mutate()`,`rename()`, `relocate()`
- - group of rows：`summarise()` 搭配 `group_by()`
-- `dplyr` vs. `base R`：你該選擇 `dplyr` 的理由
- 1. 資料操作就是一連串動作，上面的動詞讓你可以拆解動作
- 2. 這些動詞的組合幾乎涵蓋了在 excel 會用到的操作
- 3. 使用時不用加上引號或 `$` 就可以指涉資料欄位，適合 pipe
- 4. 動詞內部參數具有高度一致性
- 5. 函數底層改寫過效率高不用跑很久
-- 極力推薦、用生命推薦 `dplyr`，但你堅持不用也沒關係
-
----
 
 class: inverse, center, middle
 
-# 來看簡單的 Lab 還有作業！
+# The End
 
 
 
