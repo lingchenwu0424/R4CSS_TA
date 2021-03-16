@@ -121,9 +121,9 @@ e. 基本的資料操作
 #> # A tibble: 3 x 6
 #>   COUNTY_ID COUNTY MARRY_CNT MARRY_F_CNT MARRY_F_CNT_PER MARRY_F_CNT_RANK
 #>   <chr>     <chr>      <int>       <int>           <dbl>            <int>
-#> 1 09007     連江縣         3           1           0.667                1
-#> 2 63000     臺北市       422         215           0.491                2
-#> 3 10015     花蓮縣        24          14           0.417                3
+#> 1 10009     雲林縣        78          70           0.897                1
+#> 2 10002     宜蘭縣        62          51           0.823                2
+#> 3 10004     新竹縣        71          58           0.817                3
 ```
 
 ### B. importing data and data manipulation - excel (50 分) 
