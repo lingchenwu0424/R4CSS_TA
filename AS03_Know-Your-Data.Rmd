@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo = TRUE, results = 'hold', comment = '#>', error = TRU
 
 ## 作業目的: Know Your Data
 
-這份作業希望能夠讓你熟悉讀取不同檔案型態的資料，並利用 `dplyr` 與 管線運算子操作資料表，讓你可以認識自己要分析的資料！
+這份作業希望能夠讓你熟悉讀取不同檔案型態的資料，並利用 `dplyr` 與 管線運算子操作資料表，讓你可以認識自己要分析的資料！共有兩個題組，每個題組有七題，前五題計分、後兩題不計分。
 
 題目大部分都要求印出 tibble/dataframe，若你的資料是 tibble，直接印出即可，若是 dataframe，請印出前三列即可。
 
@@ -101,17 +101,17 @@ knitr::opts_chunk$set(echo = TRUE, results = 'hold', comment = '#>', error = TRU
 
 ```
 
-4. grouping and aggregating: 利用 `df_gapminder_clean` 計算各洲的平均預期壽命。務必在計算時考慮該如何處理 missing value，如果你前面選擇留著，這邊要留著嗎，如果你前面刪掉，對你現在的運算會有影響嗎？請先印出結果的 tibble/dataframe ，並用文字說明理由
+4. mutating, filtering, and counting: 請在 `df_gapminder_clean` 中新增欄位，判斷每筆資料的預期壽命介於以下哪個區間（小於 60、大於等於 60 但小於 70、大於等於 70），接著計算歐洲的國家中，各年裡面預期壽命各區間的資料各有多少筆。務必在計算時考慮該如何處理 missing value，如果你前面選擇留著，這邊要留著嗎，如果你前面刪掉，對你現在的運算會有影響嗎？請印出結果，並用文字說明理由
 
 ```{r message=FALSE, warning=FALSE}
 ### your code
 
 ### your result should be
-# 看你怎麼處理 missing value，結果會有不同
+# 看你怎麼處理 missing value，結果可能會有不同
 
 ### your text
 
-# 範例：如前所述，我把數值變數的 missing value 都變成 88，在取平均的時候會有影響，感覺不是好事，但我懶得改
+# 範例：如前所述，我把數值變數的 missing value 都變成 88，在算它屬於哪個區間的時候會有影響，感覺不是好事，但我懶得改
 ```
 
 5. creating variables and ordering: 請先計算**亞洲**各國 1972 年的總額 GDP (人口數 x 人均GDP)，再依照預期壽命**由大到小**排列，最後印出國家、總額 GDP、預期壽命三個欄位的 tibble/dataframe
@@ -120,27 +120,26 @@ knitr::opts_chunk$set(echo = TRUE, results = 'hold', comment = '#>', error = TRU
 ### your code
 
 ### your result should be
-# 看你怎麼處理 missing value，結果會有不同
+# 看你怎麼處理 missing value，結果可能會有不同
 ```
 
-6. subsetting: 請先篩選出歐洲各國**各自人口最多**的年份(e.g. A國 1992 年的人口多於 2007, 2002, etc.，因此留下 A國 1992 年的資料)，接著再依照預期壽命篩選出最高的十個國家(e.g. A國 1992年人口最多, B國 2002年的人口最多，比較兩國這兩年各自的預期壽命)，然後依照國家名稱由 A 到 Z 排列，最後印出國家、年份、預期壽命、人口數的 tibble/dataframe
+6. advanced - subsetting: 請先篩選出歐洲各國**各自人口最多**的年份(e.g. A國 1992 年的人口多於 2007, 2002, etc.，因此留下 A國 1992 年的資料)，接著再依照預期壽命篩選出最高的十個國家(e.g. A國 1992年人口最多, B國 2002年的人口最多，比較兩國這兩年各自的預期壽命)，然後依照國家名稱由 A 到 Z 排列，最後印出國家、年份、預期壽命、人口數的 tibble/dataframe
 
 ```{r message=FALSE, warning=FALSE}
 ### your code
 
 ### your result should be
-# 看你怎麼處理 missing value，結果會有不同
+# 看你怎麼處理 missing value，結果可能會有不同
 ```
 
-7. in-group comparing: 比較各國 1992 年和 2007 年的預期壽命差距，接著留下**各洲中**預期壽命差距最大與最小的國家，最後印出洲、國家、預期壽命差距的 tibble/dataframe
+7. advanced - in-group comparing: 比較各國 1992 年和 2007 年的預期壽命差距，接著留下**各洲中**預期壽命差距最大與最小的國家，最後印出洲、國家、預期壽命差距的 tibble/dataframe
 
 ```{r message=FALSE, warning=FALSE}
 ### your code
 
 ### your result should be
-# 看你怎麼處理 missing value，結果會有不同
+# 看你怎麼處理 missing value，結果可能會有不同
 ```
-
 
 ### data importing & data manipulation (ii) (50 分)
 
@@ -183,54 +182,60 @@ PTT 上面有好幾個和影集(drama)有關的子板(board)，下方提供 03/0
 #> 4 TaiwanDrama   344
 ```
 
-3. aggregating: 每個子板最多留言的文章是哪些？請摘要出各板擁有最多留言文章的 tibble/dataframe
+3. filtering: 請找出韓劇版(KoreaDrama)中文章留言數介於 50 到 100 之間（包含）的文章，並印出 tibble/dataframe
 
 ```{r message=FALSE, warning=FALSE}
 ### your code
 
 ### your result should be 
-#> # A tibble: 4 x 2
-#>   board       comments_max
-#> * <chr>              <dbl>
-#> 1 China-Drama          825
-#> 2 EAseries            1499
-#> 3 KoreaDrama          1498
-#> 4 TaiwanDrama         1413
+#> # A tibble: 62 x 10
+#>    board  type   title   date       comments author  text      IP       link    
+#>    <chr>  <chr>  <chr>   <date>        <dbl> <chr>   <chr>     <chr>    <chr>   
+#>  1 Korea… [LIVE] [LIVE]… 2021-01-18       80 diana8… "───────… "※ 發信站:… https:/…
+#>  2 Korea… [心得] [心得] 看… 2021-01-20       51 Eva041… "天啊~這次真的… "※ 發信站:… https:/…
+#>  3 Korea… [閒聊] [閒聊] R… 2021-01-20       51 xji6tp… "繼續用愛發電防… "※ 發信站:… https:/…
+#>  4 Korea… [LIVE] [LIVE]… 2021-01-20       75 kawasa… "EP13預告\… "※ 發信站:… https:/…
+#>  5 Korea… [心得] [心得] 晝… 2021-01-21       80 lyw318… "一般追劇，要嘛… "※ 發信站:… https:/…
+#>  6 Korea… [心得] [心得] 推… 2021-01-21       81 ilovef… "晝與夜是一部怪… "※ 發信站:… https:/…
+#>  7 Korea… [閒聊] [閒聊] J… 2021-01-22       62 rainin… "[這是碎碎念]… "※ 發信站:… https:/…
+#>  8 Korea… [心得] [心得] 女… 2021-01-23       61 Kduran… "因為目前很喜歡… "※ 發信站:… https:/…
+#>  9 Korea… [心得] [心得] 《… 2021-01-26       63 analyt… "看到新聞說有人… "※ 發信站:… https:/…
+#> 10 Korea… [心得] [心得] 看… 2021-01-26       56 n25 (n… "細部情節帶給人… "※ 發信站:… https:/…
+#> # … with 52 more rows, and 1 more variable: time <dttm>
 ```
 
-4. in-group mutating: 請先增加一個每個子板留言總數的欄位，接著計算每篇文章的留言數佔它所屬的子板留言總數的比例，請印出板名、留言數、子板留言總數、留言數佔子板留言總數比例的 tibble/dataframe
+4. mutating and counting: 請先增加一個每則文章月份的欄位，接著計算各版中各個月份各自有多少篇文章，最後印出板名、月份、文章數的 tibble/dataframe
 
 ```{r message=FALSE, warning=FALSE}
 ### your code
 
 ### your result should be 
-#> # A tibble: 1,457 x 4
-#> # Groups:   board [4]
-#>    board      comments comments_all comments_per
-#>    <chr>         <dbl>        <dbl>        <dbl>
-#>  1 KoreaDrama       20        61846    0.000323 
-#>  2 KoreaDrama        5        61846    0.0000808
-#>  3 KoreaDrama      101        61846    0.00163  
-#>  4 KoreaDrama        9        61846    0.000146 
-#>  5 KoreaDrama      249        61846    0.00403  
-#>  6 KoreaDrama      406        61846    0.00656  
-#>  7 KoreaDrama       80        61846    0.00129  
-#>  8 KoreaDrama       28        61846    0.000453 
-#>  9 KoreaDrama      214        61846    0.00346  
-#> 10 KoreaDrama       35        61846    0.000566 
-#> # … with 1,447 more rows
+#> # A tibble: 21 x 3
+#>    board       month     n
+#>    <chr>       <dbl> <int>
+#>  1 China-Drama     1   135
+#>  2 China-Drama     2   137
+#>  3 China-Drama     3    24
+#>  4 China-Drama     4     1
+#>  5 China-Drama     8     1
+#>  6 China-Drama    12    63
+#>  7 EAseries        1   111
+#>  8 EAseries        2   240
+#>  9 EAseries        3    27
+#> 10 EAseries        4     3
+#> # … with 11 more rows
 ```
 
-5. subsetting and comparing: "2021-02-23"到"2021-03-01"之間(包含這兩天)，哪個板的文章數量最多？請印出板名、文章數的 tibble/dataframe
+5. counting and comparing: "2021-02-23"到"2021-03-01"之間(包含這兩天)，哪個板的文章數量最多？請留下文章數最多的板，接著依照**文章數、板名的順序**印出 tibble/dataframe
 
 ```{r message=FALSE, warning=FALSE}
 ### your code
 
 ### your result should be 
 #> # A tibble: 1 x 2
-#>   board        n
-#>   <chr>    <int>
-#> 1 EAseries    56
+#>       n board   
+#>   <int> <chr>   
+#> 1    56 EAseries
 ```
 
 6. advanced - in-group subsetting: 請找出各板中"發文數量最多的一天"當天"留言數前兩多"的文章，請印出板名、標題、日期、留言數的 tibble/dataframe
