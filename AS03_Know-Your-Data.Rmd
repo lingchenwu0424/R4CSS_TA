@@ -269,19 +269,18 @@ PTT 上面有好幾個和影集(drama)有關的子板(board)，下方提供 03/0
 
 ### your result should be 
 #> # A tibble: 23 x 4
-#> # Groups:   board [4]
-#>    board       type       n     per
-#>    <chr>       <chr>  <int>   <dbl>
-#>  1 China-Drama [LIVE]    45 0.125  
-#>  2 China-Drama [其他]    57 0.158  
-#>  3 China-Drama [心得]   128 0.355  
-#>  4 China-Drama [情報]    12 0.0332 
-#>  5 China-Drama [新聞]     9 0.0249 
-#>  6 China-Drama [閒聊]   110 0.305  
-#>  7 EAseries    [其他]    91 0.238  
-#>  8 EAseries    [心得]   109 0.285  
-#>  9 EAseries    [情報]     1 0.00261
-#> 10 EAseries    [新聞]   123 0.321  
+#>    board       type       n    per
+#>    <chr>       <chr>  <int>  <dbl>
+#>  1 China-Drama [心得]   128 0.355 
+#>  2 China-Drama [閒聊]   110 0.305 
+#>  3 China-Drama [其他]    57 0.158 
+#>  4 China-Drama [LIVE]    45 0.125 
+#>  5 China-Drama [情報]    12 0.0332
+#>  6 China-Drama [新聞]     9 0.0249
+#>  7 EAseries    [新聞]   123 0.321 
+#>  8 EAseries    [心得]   109 0.285 
+#>  9 EAseries    [其他]    91 0.238 
+#> 10 EAseries    [閒聊]    59 0.154 
 #> # … with 13 more rows
 ```
 
