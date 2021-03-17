@@ -8,9 +8,6 @@
 * LAB 03 Homework RMarkdown reference [Rmd](https://github.com/P4CSS/R4CSS_TA/blob/main/Lab03_Homework_R-Intermediate_ref.Rmd), [html](https://p4css.github.io/R4CSS_TA/Lab03_Homework_R-Intermediate_ref.html)    
 * AS 02 Homework RMarkdown reference [Rmd](https://github.com/P4CSS/R4CSS_TA/blob/main/AS02_R-Intermediate_ref.Rmd), [html](https://p4css.github.io/R4CSS_TA/AS02_R-Intermediate_ref.html)       
 
-
-
-
 ### week03_03/09
 
 * LAB 03 Tutorial R-Intermediate [slide](https://p4css.github.io/R4CSS_TA/Lab03_Tutorial_R-Intermediate.html)
