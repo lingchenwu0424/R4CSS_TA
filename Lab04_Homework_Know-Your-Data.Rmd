@@ -39,8 +39,12 @@ e. 基本的資料操作
 1. data importing：請讀取請右方路徑的 csv 檔，路徑為 `data 資料夾 -> Lab04 資料夾 -> 109Q4_county_marriage.csv`，並取名為 `df_109Q4_county_marriage`。檔案讀進來後可能有亂碼，請任選課堂提到的亂碼處理方式（讀取前修改編碼、讀取設定參數、讀進後修改編碼），將檔案以正確編碼印出。若你是讀取前修改編碼，請用文字說明步驟，若你是設定參數或修改編碼，請在程式碼中用註解(`#`)說明你在做什麼！
 
 ```{r message=FALSE,warning=FALSE}
+library(tidyverse)
 ### your code
 
+df_109Q4_county_marriage<-read_csv("data/Lab04/109Q4_county_marriage.csv")
+df_109Q4_county_marriage%>%
+  mutate(COUNTY=iconv(COUNTY,from="BIG5",to="UTF8"),MARRY_CP_CNT=iconv(MARRY_CP_CNT,from="BIG5",to="UTF8"),MARRY_CNT=iconv(MARRY_CNT,from="BIG5",to="UTF8"),MARRY_M_CNT=iconv(MARRY_M_CNT,from="BIG5",to="UTF8"), MARRY_F_CNT=iconv(MARRY_F_CNT,from="BIG5",to="UTF8"),INFO_TIME=iconv(INFO_TIME,from="BIG5",to="UTF8"))%>%
 
 ### your result should be 
 #> # A tibble: 23 x 7
@@ -63,7 +67,9 @@ e. 基本的資料操作
 
 ```{r message=FALSE,warning=FALSE}
 ### your code
-
+  slice(-1)
+mutate(MARRY_CP_CNT=as.integer(MARRY_CP_CNT))
+arrange(MARRY_CP_CNT)
 ### your result should be 
 #> # A tibble: 22 x 7
 #>    COUNTY_ID COUNTY MARRY_CP_CNT MARRY_CNT MARRY_M_CNT MARRY_F_CNT INFO_TIME
@@ -134,7 +140,13 @@ e. 基本的資料操作
 
 ```{r message=FALSE,warning=FALSE}
 ### your code
+library(readx1)
+df_ntu_exam<-read_excel("",range="A1:T225")
+df_ntu_exam%>%colnames()
+df_ntu_exam%>%select(-c("...7","...9","口試"))
+slice(-c(1:5))
 
+df_ntu_exam %>% slice(-c(1:5)) filter(is.na("報考人數"))
 ### your result should be 
 #> # A tibble: 224 x 20
 #>    口試    簡章代碼 口試比例 系所別 組別  報考人數 ...7  招生名額 ...9  錄取人數
