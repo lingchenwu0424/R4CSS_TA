@@ -42,7 +42,8 @@ knitr::opts_chunk$set(echo = TRUE, results = 'hold', comment = '#>', error = TRU
 
 ```{r message=FALSE, warning=FALSE}
 ### your code
-
+df_gapminder_raw<-read.table("data/AS03/gapminder_raw.tsv",header=TRUE,fill = TRUE)
+mutate
 ### your result should be
 #> # A tibble: 1,704 x 6
 #>    country     continent  year lifeExp      pop gdpPercap
