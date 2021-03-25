@@ -42,8 +42,9 @@ knitr::opts_chunk$set(echo = TRUE, results = 'hold', comment = '#>', error = TRU
 
 ```{r message=FALSE, warning=FALSE}
 ### your code
-df_gapminder_raw<-read.table("data/AS03/gapminder_raw.tsv",header=TRUE,fill = TRUE)
-mutate
+library(dplyr)
+df_gapminder_raw<-read.table("data/AS03/gapminder_raw.tsv",header=FALSE,sep = "\t",na.strings = "NA",quote="")
+colnames(df_gapminder_raw) <- c("country", "continent","year","lifeExp","pop","gdpPercap")
 ### your result should be
 #> # A tibble: 1,704 x 6
 #>    country     continent  year lifeExp      pop gdpPercap
@@ -65,14 +66,17 @@ mutate
 
 ```{r message=FALSE, warning=FALSE}
 ### your code
+df_gapminder_raw%>%
+filter(is.na(continent)|is.na(year)|is.na(lifeExp)|is.na(pop)|is.na(gdpPercap))
 
-
+df_gapminder_clean<-df_gapminder_raw[is.na(df_gapminder_raw$continent),"continent"]<-"Asia"
+df_gapminder_clean <- df_gapminder_raw[complete.cases(df_gapminder_raw), ]
 
 ### your result should be
 # 不一定，看你怎麼處理資料
 
 ### your text (把文字描述寫在 code chunk 中)
-
+print("因為知道Nepal是位於亞洲，所以將遺漏的continent資料手動補上，其他遺漏其他欄位數字的國家就移除掉。")
 # 範例答案：我覺得 missing value 看了令人很不舒服，數值變數應該都改成 88 比較吉利，數值變數以外都應該改成 "others"
 ```
 
@@ -80,6 +84,8 @@ mutate
 
 ```{r message=FALSE, warning=FALSE}
 ### your code
+df_gapminder_clean%>%
+filter(country=="Taiwan")
 
 ### your result should be
 #> # A tibble: 12 x 6
@@ -99,14 +105,16 @@ mutate
 #> 12 Taiwan  Asia       2007    78.4 23174294    28718.
 
 ### your text
-
+print("台灣的人口預期壽命、人口數和人均GDP都逐年上升。")
 ```
 
 4. grouping and aggregating: 利用 `df_gapminder_clean` 計算各洲的平均預期壽命。務必在計算時考慮該如何處理 missing value，如果你前面選擇留著，這邊要留著嗎，如果你前面刪掉，對你現在的運算會有影響嗎？請先印出結果的 tibble/dataframe ，並用文字說明理由
 
 ```{r message=FALSE, warning=FALSE}
 ### your code
-
+df_gapminder_clean%>%
+group_by(continent)%>%
+  summarise(continent_life=mean(lifeExp))
 ### your result should be
 # 看你怎麼處理 missing value，結果會有不同
 
@@ -119,7 +127,11 @@ mutate
 
 ```{r message=FALSE, warning=FALSE}
 ### your code
-
+df_gapminder_clean %>%
+  mutate(total_gdp=pop*gdpPercap)%>%
+   arrange(desc(lifeExp))%>%
+  select(country,total_gdp,lifeExp)
+  
 ### your result should be
 # 看你怎麼處理 missing value，結果會有不同
 ```
@@ -147,11 +159,12 @@ mutate
 
 PTT 上面有好幾個和影集(drama)有關的子板(board)，下方提供 03/02 當天所抓取的相關資料，請載入這份資料後回答問題。
 
-1. data importing: 請讀取請右方路徑的 csv 檔，路徑為 `data 資料夾 -> AS03 資料夾 -> df_main_clean.csv`，取名為 `df_main_clean`後印出
+1. data importing: 請讀取右方路徑的 csv 檔，路徑為 `data 資料夾 -> AS03 資料夾 -> df_main_clean.csv`，取名為 `df_main_clean`後印出
 
 ```{r message=FALSE, warning=FALSE}
 ### your code
-
+df_main_clean<-read.csv("data/AS03/df_main_clean.csv")
+df_main_clean[1:3,]
 ### your result should be 
 #> # A tibble: 1,457 x 10
 #>    board  type   title   date       comments author  text      IP       link    
@@ -173,7 +186,8 @@ PTT 上面有好幾個和影集(drama)有關的子板(board)，下方提供 03/0
 
 ```{r message=FALSE, warning=FALSE}
 ### your code
-
+df_main_clean%>%
+count(board)
 ### your result should be 
 #> # A tibble: 4 x 2
 #>   board           n
@@ -188,7 +202,10 @@ PTT 上面有好幾個和影集(drama)有關的子板(board)，下方提供 03/0
 
 ```{r message=FALSE, warning=FALSE}
 ### your code
-
+df_main_clean%>%
+group_by(board)%>%
+top_n(1,comments)%>%
+  summarise(comments_max=sum(comments))
 ### your result should be 
 #> # A tibble: 4 x 2
 #>   board       comments_max
@@ -203,7 +220,11 @@ PTT 上面有好幾個和影集(drama)有關的子板(board)，下方提供 03/0
 
 ```{r message=FALSE, warning=FALSE}
 ### your code
-
+df_main_clean%>%
+group_by(board)%>%
+mutate(comments_all=sum(comments))%>%
+mutate(comments_per=comments/comments_all)%>%
+select(board,comments,comments_all,comments_per)
 ### your result should be 
 #> # A tibble: 1,457 x 4
 #> # Groups:   board [4]
@@ -226,7 +247,13 @@ PTT 上面有好幾個和影集(drama)有關的子板(board)，下方提供 03/0
 
 ```{r message=FALSE, warning=FALSE}
 ### your code
+df_main_clean%>%
+filter(date %in% c("2021-02-23","2021-02-24","2021-02-25","2021-02-26","2021-02-27","2021-02-28","2021-03-01"))%>%
+  count(board)%>%
+  top_n(1,n)
+  
 
+  
 ### your result should be 
 #> # A tibble: 1 x 2
 #>   board        n
