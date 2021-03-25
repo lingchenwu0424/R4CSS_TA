@@ -354,7 +354,7 @@ div.tocify {
 
 <div id="作業目的-know-your-data" class="section level2">
 <h2>作業目的: Know Your Data</h2>
-<p>這份作業希望能夠讓你熟悉讀取不同檔案型態的資料，並利用 <code>dplyr</code> 與 管線運算子操作資料表，讓你可以認識自己要分析的資料！</p>
+<p>這份作業希望能夠讓你熟悉讀取不同檔案型態的資料，並利用 <code>dplyr</code> 與 管線運算子操作資料表，讓你可以認識自己要分析的資料！共有兩個題組，每個題組有七題，前五題計分、後兩題不計分。</p>
 <p>題目大部分都要求印出 tibble/dataframe，若你的資料是 tibble，直接印出即可，若是 dataframe，請印出前三列即可。</p>
 </div>
 <div id="作業-know-your-data" class="section level2">
@@ -425,37 +425,37 @@ div.tocify {
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="do">### your text</span></span></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
-<li>grouping and aggregating: 利用 <code>df_gapminder_clean</code> 計算各洲的平均預期壽命。務必在計算時考慮該如何處理 missing value，如果你前面選擇留著，這邊要留著嗎，如果你前面刪掉，對你現在的運算會有影響嗎？請先印出結果的 tibble/dataframe ，並用文字說明理由</li>
+<li>mutating, filtering, and counting: 請在 <code>df_gapminder_clean</code> 中新增欄位，判斷每筆資料的預期壽命介於以下哪個區間（小於 60、大於等於 60 但小於 70、大於等於 70），接著計算歐洲的國家中，各年裡面預期壽命各區間的資料各有多少筆。務必在計算時考慮該如何處理 missing value，如果你前面選擇留著，這邊要留著嗎，如果你前面刪掉，對你現在的運算會有影響嗎？請印出結果，並用文字說明理由</li>
 </ol>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">### your code</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="do">### your result should be</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 看你怎麼處理 missing value，結果會有不同</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 看你怎麼處理 missing value，結果可能會有不同</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="do">### your text</span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 範例：如前所述，我把數值變數的 missing value 都變成 88，在取平均的時候會有影響，感覺不是好是，但我懶得改</span></span></code></pre></div>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 範例：如前所述，我把數值變數的 missing value 都變成 88，在算它屬於哪個區間的時候會有影響，感覺不是好事，但我懶得改</span></span></code></pre></div>
 <ol start="5" style="list-style-type: decimal">
 <li>creating variables and ordering: 請先計算<strong>亞洲</strong>各國 1972 年的總額 GDP (人口數 x 人均GDP)，再依照預期壽命<strong>由大到小</strong>排列，最後印出國家、總額 GDP、預期壽命三個欄位的 tibble/dataframe</li>
 </ol>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">### your code</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="do">### your result should be</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 看你怎麼處理 missing value，結果會有不同</span></span></code></pre></div>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 看你怎麼處理 missing value，結果可能會有不同</span></span></code></pre></div>
 <ol start="6" style="list-style-type: decimal">
-<li>subsetting: 請先篩選出歐洲各國<strong>各自人口最多</strong>的年份(e.g. A國 1992 年的人口多於 2007, 2002, etc.，因此留下 A國 1992 年的資料)，接著再依照預期壽命篩選出最高的十個國家(e.g. A國 1992年人口最多, B國 2002年的人口最多，比較兩國這兩年各自的預期壽命)，然後依照國家名稱由 A 到 Z 排列，最後印出國家、年份、預期壽命、人口數的 tibble/dataframe</li>
+<li>advanced - subsetting: 請先篩選出歐洲各國<strong>各自人口最多</strong>的年份(e.g. A國 1992 年的人口多於 2007, 2002, etc.，因此留下 A國 1992 年的資料)，接著再依照預期壽命篩選出最高的十個國家(e.g. A國 1992年人口最多, B國 2002年的人口最多，比較兩國這兩年各自的預期壽命)，然後依照國家名稱由 A 到 Z 排列，最後印出國家、年份、預期壽命、人口數的 tibble/dataframe</li>
 </ol>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="do">### your code</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="do">### your result should be</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 看你怎麼處理 missing value，結果會有不同</span></span></code></pre></div>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 看你怎麼處理 missing value，結果可能會有不同</span></span></code></pre></div>
 <ol start="7" style="list-style-type: decimal">
-<li>in-group comparing: 比較各國 1992 年和 2007 年的預期壽命差距，接著留下<strong>各洲中</strong>預期壽命差距最大與最小的國家，最後印出洲、國家、預期壽命差距的 tibble/dataframe</li>
+<li>advanced - in-group comparing: 比較各國 1992 年和 2007 年的預期壽命差距，接著留下<strong>各洲中</strong>預期壽命差距最大與最小的國家，最後印出洲、國家、預期壽命差距的 tibble/dataframe</li>
 </ol>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do">### your code</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="do">### your result should be</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 看你怎麼處理 missing value，結果會有不同</span></span></code></pre></div>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 看你怎麼處理 missing value，結果可能會有不同</span></span></code></pre></div>
 </div>
 <div id="data-importing-data-manipulation-ii-50-分" class="section level3">
 <h3>data importing &amp; data manipulation (ii) (50 分)</h3>
@@ -494,49 +494,55 @@ div.tocify {
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 KoreaDrama    369</span></span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 TaiwanDrama   344</span></span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
-<li>aggregating: 每個子板最多留言的文章是哪些？請摘要出各板擁有最多留言文章的 tibble/dataframe</li>
+<li>filtering: 請找出韓劇版(KoreaDrama)中文章留言數介於 50 到 100 之間（包含）的文章，並印出 tibble/dataframe</li>
 </ol>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="do">### your code</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="do">### your result should be </span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 4 x 2</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   board       comments_max</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; * &lt;chr&gt;              &lt;dbl&gt;</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 China-Drama          825</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 EAseries            1499</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 KoreaDrama          1498</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 TaiwanDrama         1413</span></span></code></pre></div>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 62 x 10</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    board  type   title   date       comments author  text      IP       link    </span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;   &lt;date&gt;        &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;   </span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 Korea… [LIVE] [LIVE]… 2021-01-18       80 diana8… &quot;───────… &quot;※ 發信站:… https:/…</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 Korea… [心得] [心得] 看… 2021-01-20       51 Eva041… &quot;天啊~這次真的… &quot;※ 發信站:… https:/…</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 Korea… [閒聊] [閒聊] R… 2021-01-20       51 xji6tp… &quot;繼續用愛發電防… &quot;※ 發信站:… https:/…</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 Korea… [LIVE] [LIVE]… 2021-01-20       75 kawasa… &quot;EP13預告\… &quot;※ 發信站:… https:/…</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 Korea… [心得] [心得] 晝… 2021-01-21       80 lyw318… &quot;一般追劇，要嘛… &quot;※ 發信站:… https:/…</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 Korea… [心得] [心得] 推… 2021-01-21       81 ilovef… &quot;晝與夜是一部怪… &quot;※ 發信站:… https:/…</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 Korea… [閒聊] [閒聊] J… 2021-01-22       62 rainin… &quot;[這是碎碎念]… &quot;※ 發信站:… https:/…</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 Korea… [心得] [心得] 女… 2021-01-23       61 Kduran… &quot;因為目前很喜歡… &quot;※ 發信站:… https:/…</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 Korea… [心得] [心得] 《… 2021-01-26       63 analyt… &quot;看到新聞說有人… &quot;※ 發信站:… https:/…</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 Korea… [心得] [心得] 看… 2021-01-26       56 n25 (n… &quot;細部情節帶給人… &quot;※ 發信站:… https:/…</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 52 more rows, and 1 more variable: time &lt;dttm&gt;</span></span></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
-<li>in-group mutating: 請先增加一個每個子板留言總數的欄位，接著計算每篇文章的留言數佔它所屬的子板留言總數的比例，請印出板名、留言數、子板留言總數、留言數佔子板留言總數比例的 tibble/dataframe</li>
+<li>mutating and counting: 請先增加一個每則文章月份的欄位，接著計算各版中各個月份各自有多少篇文章，最後印出板名、月份、文章數的 tibble/dataframe</li>
 </ol>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="do">### your code</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="do">### your result should be </span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1,457 x 4</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # Groups:   board [4]</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    board      comments comments_all comments_per</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;         &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 KoreaDrama       20        61846    0.000323 </span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 KoreaDrama        5        61846    0.0000808</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 KoreaDrama      101        61846    0.00163  </span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 KoreaDrama        9        61846    0.000146 </span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 KoreaDrama      249        61846    0.00403  </span></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 KoreaDrama      406        61846    0.00656  </span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 KoreaDrama       80        61846    0.00129  </span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 KoreaDrama       28        61846    0.000453 </span></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 KoreaDrama      214        61846    0.00346  </span></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 KoreaDrama       35        61846    0.000566 </span></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 1,447 more rows</span></span></code></pre></div>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 21 x 3</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    board       month     n</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;       &lt;dbl&gt; &lt;int&gt;</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 China-Drama     1   135</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 China-Drama     2   137</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 China-Drama     3    24</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 China-Drama     4     1</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 China-Drama     8     1</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 China-Drama    12    63</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 EAseries        1   111</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 EAseries        2   240</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 EAseries        3    27</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 EAseries        4     3</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 11 more rows</span></span></code></pre></div>
 <ol start="5" style="list-style-type: decimal">
-<li>subsetting and comparing: “2021-02-23”到“2021-03-01”之間(包含這兩天)，哪個板的文章數量最多？請印出板名、文章數的 tibble/dataframe</li>
+<li>counting and comparing: “2021-02-23”到“2021-03-01”之間(包含這兩天)，哪個板的文章數量最多？請留下文章數最多的板，接著依照<strong>文章數、板名的順序</strong>印出 tibble/dataframe</li>
 </ol>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="do">### your code</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="do">### your result should be </span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 x 2</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   board        n</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 EAseries    56</span></span></code></pre></div>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       n board   </span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;   </span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    56 EAseries</span></span></code></pre></div>
 <ol start="6" style="list-style-type: decimal">
 <li>advanced - in-group subsetting: 請找出各板中“發文數量最多的一天”當天“留言數前兩多”的文章，請印出板名、標題、日期、留言數的 tibble/dataframe</li>
 </ol>
@@ -544,21 +550,18 @@ div.tocify {
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="do">### your code</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="do">### your result should be </span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 172 x 4</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # Groups:   date [91]</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    board       title                                         date       comments</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;       &lt;chr&gt;                                         &lt;date&gt;        &lt;dbl&gt;</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 China-Drama [新聞]鄭爽被罵翻後首錄影 網傳將已錄好引退聲明 2021-01-20      825</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 China-Drama [討論] 鄭爽有演，還沒播出的影劇會收到影響嗎？ 2021-01-20      732</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 China-Drama [Live] 上陽賦 58-63 超前點播                  2021-02-17      707</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 China-Drama Re: [心得] 到底該不該推薦有翡                 2020-12-26      606</span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 China-Drama [問題] 陳情令到第幾集開始好看?                2020-12-17      592</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 China-Drama [Live] 斗羅大陸 EP6-11 兄妹                   2021-02-07      537</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 China-Drama [求薦] 終極筆記後該看哪個？                   2021-02-09      530</span></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 China-Drama [新聞]《陳情令》爆下架危機!網曝4重點…審查卡   2021-01-25      529</span></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 China-Drama [Live] 斗羅大陸 EP28-33 超前點播              2021-02-15      449</span></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 China-Drama [心得] 到底該不該推薦有翡                     2020-12-24      444</span></span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 162 more rows</span></span></code></pre></div>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 8 x 4</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # Groups:   board [4]</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   board       title                                        date       comments</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;                                        &lt;date&gt;        &lt;dbl&gt;</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 China-Drama [心得] 太過期待以致失望的有翡（含原著雷）    2021-01-24      415</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 China-Drama [Live] 上陽賦 EP25 蕭綦高光即將開始          2021-01-24      337</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 EAseries    [心得] Wandavision S01E05 大暴雷啦!!         2021-02-05      182</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 EAseries    [請益] 是否可推薦帶入美式生活的影集          2021-01-22       94</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 KoreaDrama  [情報] 哲仁王后花絮 未公開畫面 金正賢專訪    2021-02-17     1352</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 KoreaDrama  [心得] 哲仁王后結局                          2021-02-17      836</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 TaiwanDrama [LIVE] 台視《生生世世》第162集 台視週間20:00 2020-12-30      266</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8 TaiwanDrama [LIVE] 愛不愛栗絲 第三集                     2020-12-30       64</span></span></code></pre></div>
 <ol start="7" style="list-style-type: decimal">
 <li>advanced - transforming variables and counting: 文章類型(type)非常多樣，譬如“[心得]”, “[閒聊]” 等，請保留“[心得]”、“[閒聊]”、“[新聞]”、“[情報]”，並將“[LIVE]”與“[Live]”合併成“[LIVE]”，剩下其他種類或是 missing value 都改成“[其他]”，修改後再計算各板的文章類型<strong>比例</strong>(百分比)，最後按照每個版的名稱由 A 到 Z、比例由大到小排列，並印出板名、類型、類型文章數、類型文章數占比的 tibble/dataframe</li>
 </ol>
@@ -567,18 +570,18 @@ div.tocify {
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="do">### your result should be </span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 23 x 4</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    board       type       n      per</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;       &lt;chr&gt;  &lt;int&gt;    &lt;dbl&gt;</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 China-Drama [LIVE]    45 0.0309  </span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 China-Drama [其他]    57 0.0391  </span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 China-Drama [心得]   128 0.0879  </span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 China-Drama [情報]    12 0.00824 </span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 China-Drama [新聞]     9 0.00618 </span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 China-Drama [閒聊]   110 0.0755  </span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 EAseries    [其他]    91 0.0625  </span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 EAseries    [心得]   109 0.0748  </span></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 EAseries    [情報]     1 0.000686</span></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 EAseries    [新聞]   123 0.0844  </span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    board       type       n    per</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;       &lt;chr&gt;  &lt;int&gt;  &lt;dbl&gt;</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 China-Drama [心得]   128 0.355 </span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 China-Drama [閒聊]   110 0.305 </span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 China-Drama [其他]    57 0.158 </span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 China-Drama [LIVE]    45 0.125 </span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 China-Drama [情報]    12 0.0332</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 China-Drama [新聞]     9 0.0249</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 EAseries    [新聞]   123 0.321 </span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 EAseries    [心得]   109 0.285 </span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 EAseries    [其他]    91 0.238 </span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 EAseries    [閒聊]    59 0.154 </span></span>
 <span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 13 more rows</span></span></code></pre></div>
 </div>
 </div>
